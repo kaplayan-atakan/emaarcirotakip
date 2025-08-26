@@ -2156,7 +2156,8 @@ schedule.scheduleJob('0 18 2 * *', async () => {
             aylikVeri.toplamKisi, 
             'SCHEDULER', 
             'SYSTEM: Otomatik Aylık Scheduler',
-            aylikVeri.gunSayisi
+            aylikVeri.gunSayisi,
+            aylikVeri.detaylar
         );
         
         console.log(`✅ [SCHEDULER] Aylık rapor başarıyla gönderildi!`);
@@ -2217,7 +2218,8 @@ app.post('/monthly-send', async (req, res) => {
             aylikVeri.toplamKisi,
             'MANUAL',
             kullaniciAdi,
-            aylikVeri.gunSayisi
+            aylikVeri.gunSayisi,
+            aylikVeri.detaylar
         );
 
         res.json({

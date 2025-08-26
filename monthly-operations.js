@@ -242,7 +242,7 @@ async function aylikGonderimKontrol(yil, ay) {
 }
 
 // 🌐 Monthly Sales API gönderim fonksiyonu
-async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi = 'SYSTEM', gunSayisi = 30) {
+async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi = 'SYSTEM', gunSayisi = 30, gunlukDetaylar = []) {
     let restoPool = null;
     
     try {
@@ -306,7 +306,7 @@ async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
             `);
         
         // Email gönder
-    await sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi, gunSayisi);
+    await sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi, gunSayisi, gunlukDetaylar);
         
         console.log(`✅ [BAŞARILI] Aylık veri gönderildi! API Status: ${response.status}, Dönem: ${ay}/${yil}`);
         
@@ -348,7 +348,7 @@ async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
 }
 
 // 📧 Aylık email gönderim fonksiyonu
-async function sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi, gunSayisi = 30) {
+async function sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi, gunSayisi = 30, gunlukDetaylar = []) {
     const ayAdlari = [
         '', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
         'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
@@ -358,6 +358,13 @@ async function sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
     const divisor = gunSayisi > 0 ? gunSayisi : 1;
     const ortalamaGunlukCiro = (toplamCiro / divisor).toFixed(2);
     const ortalamaGunlukKisi = Math.round(toplamKisi / divisor);
+    
+    // Günlük detayları tarihe göre sırala
+    const siraliDetaylar = [...gunlukDetaylar].sort((a, b) => {
+        const dateA = new Date(a.tarih.split('.').reverse().join('-'));
+        const dateB = new Date(b.tarih.split('.').reverse().join('-'));
+        return dateA - dateB;
+    });
     
     const mailOptions = {
         from: 'sistem@apazgroup.com',
@@ -414,6 +421,53 @@ async function sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
                             <p style="margin: 5px 0;"><strong>API:</strong> Monthly Sales API</p>
                         </div>
                     </div>
+                    
+                    ${siraliDetaylar.length > 0 ? `
+                    <div style="background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+                        <h3 style="color: #495057; margin: 0 0 20px 0; font-size: 16px;">📊 Günlük Gönderimler Tablosu</h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="background: #f8f9fa;">
+                                        <th style="padding: 12px 8px; text-align: left; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Tarih</th>
+                                        <th style="padding: 12px 8px; text-align: right; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Ciro (₺)</th>
+                                        <th style="padding: 12px 8px; text-align: right; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Kişi Sayısı</th>
+                                        <th style="padding: 12px 8px; text-align: center; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Kaynak</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${siraliDetaylar.map((detay, index) => `
+                                        <tr style="background: ${index % 2 === 0 ? '#fff' : '#f8f9fa'};">
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; color: #495057;">${detay.tarih}</td>
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: right; color: #27ae60; font-weight: 500;">${detay.ciro.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: right; color: #3498db; font-weight: 500;">${detay.kisi.toLocaleString('tr-TR')}</td>
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: center;">
+                                                <span style="background: ${detay.kaynak === 'LOG' ? '#28a745' : '#6c757d'}; color: white; padding: 3px 6px; border-radius: 3px; font-size: 11px; font-weight: 500;">
+                                                    ${detay.kaynak === 'LOG' ? 'Gönderildi' : detay.kaynak}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                                <tfoot>
+                                    <tr style="background: #e9ecef; font-weight: 600;">
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; color: #495057;">TOPLAM</td>
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; text-align: right; color: #27ae60; font-weight: bold;">${toplamCiro.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; text-align: right; color: #3498db; font-weight: bold;">${toplamKisi.toLocaleString('tr-TR')}</td>
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; text-align: center; color: #495057;">${siraliDetaylar.length} gün</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        ${gunSayisi < new Date(yil, ay, 0).getDate() ? `
+                        <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 6px; border-left: 3px solid #ffc107;">
+                            <p style="margin: 0; color: #856404; font-size: 13px;">
+                                ⚠️ <strong>Not:</strong> Bu ay toplam ${new Date(yil, ay, 0).getDate()} gün olmasına rağmen ${gunSayisi} gün verisi gönderilmiştir. ${new Date(yil, ay, 0).getDate() - gunSayisi} gün eksik.
+                            </p>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
                     
                     <div style="margin-top: 25px; padding: 15px; background: #d4edda; border-radius: 8px; border-left: 4px solid #28a745;">
                         <p style="margin: 0; color: #155724; font-size: 14px;">
