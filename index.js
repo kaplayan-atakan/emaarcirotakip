@@ -1217,24 +1217,31 @@ app.get('/', async (req, res) => {
 
                     <script>
                         // Global functions (accessible from onclick)
-                        function showTab(tabName) {
-                            // Hide all tabs
-                            document.getElementById('daily-tab').style.display = 'none';
-                            document.getElementById('monthly-tab').style.display = 'none';
-                            
-                            // Remove active class from all buttons
-                            document.querySelectorAll('.tab-btn').forEach(btn => {
-                                btn.style.borderBottomColor = 'transparent';
-                                btn.style.color = '#6c757d';
-                            });
-                            
-                            // Show selected tab
-                            document.getElementById(tabName + '-tab').style.display = 'block';
-                            
-                            // Mark button as active
-                            event.target.style.borderBottomColor = '#007bff';
-                            event.target.style.color = '#007bff';
+                        function showTab(tabName, ev) {
+                            try {
+                                // Hide all tabs
+                                var daily = document.getElementById('daily-tab');
+                                var monthly = document.getElementById('monthly-tab');
+                                if (daily) daily.style.display = 'none';
+                                if (monthly) monthly.style.display = 'none';
+                                // Reset buttons
+                                document.querySelectorAll('.tab-btn').forEach(function(btn){
+                                    btn.style.borderBottomColor = 'transparent';
+                                    btn.style.color = '#6c757d';
+                                });
+                                // Show requested
+                                var targetDiv = document.getElementById(tabName + '-tab');
+                                if (targetDiv) targetDiv.style.display = 'block';
+                                var evt = ev || window.event;
+                                var origin = (evt && evt.currentTarget) || (evt && evt.target);
+                                if (origin) {
+                                    origin.style.borderBottomColor = '#007bff';
+                                    origin.style.color = '#007bff';
+                                }
+                            } catch(e) { console.error('showTab error', e); }
                         }
+                        // Explicit global exposure (in case of scoping)
+                        window.showTab = showTab;
                         
                         function showGlobalSpinner() {
                             const spinner = document.getElementById('globalSpinner');
