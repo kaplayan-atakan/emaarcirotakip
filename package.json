@@ -1,0 +1,40 @@
+{
+    "name": "bdemaar",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "start-https": "node index.js",
+        "start-letsencrypt": "node index-letsencrypt.js",
+        "install-service": "node install-service.js",
+        "uninstall-service": "node uninstall-service.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@greenlock/manager": "^3.1.0",
+        "acme-http-01-standalone": "^3.0.5",
+        "activedirectory": "^0.7.2",
+        "activedirectory2": "^2.2.0",
+        "axios": "^1.9.0",
+        "body-parser": "^2.2.0",
+        "compression": "^1.8.0",
+        "cors": "^2.8.5",
+        "express": "^5.1.0",
+        "express-session": "^1.18.1",
+        "greenlock-express": "^4.0.3",
+        "greenlock-store-fs": "^3.2.2",
+        "helmet": "^8.1.0",
+        "mssql": "^11.0.1",
+        "node-schedule": "^2.1.1",
+        "nodemailer": "^7.0.3",
+        "selfsigned": "^2.4.1",
+        "winston": "^3.17.0"
+    },
+    "devDependencies": {
+        "node-windows": "^1.0.0-beta.8"
+    }
+}

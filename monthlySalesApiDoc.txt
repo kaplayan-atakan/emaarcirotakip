@@ -1,0 +1,37 @@
+Monthly Sales API
+Monthly Sales :-REST API to push monthly sales information by Tenants.
+Request:- The API accepts the following parameters which include the following attributes along with the provided authorization key:
+METHOD URL
+POST https://api.emaar.com/emaar/trky/sales
+Authorization Header: - x-api-key 
+Content-Type: - application/json
+Attribute Type Mandatory Description
+PROPERTYCODE string Yes Property code for which the data is to be pushed
+LEASECODE string Yes Lease code for which the data is to be pushed.
+SaleType string Yes Sales type for which the data is to be pushed
+SalesFromDATE String Yes 1
+st of the month for which the data is to be pushed.
+NetSalesAmount string Yes Push net sales value.
+NoofTransactions string Yes Number of receipts/transaction for the specified sale date.
+SalesFrequency String Yes Monthly
+Response:- The following are the possible values with description for each one. All status codes are standard HTTP status codes.
+4
+Technical Specification:-Monthly Sales API
+Code Result Error Description
+2xx Success Null
+4xx Error Data Exceptions
+5xx Error System Exception
+
+Payload for single sales type 
+
+[
+{
+"PROPERTYCODE": "esm", 
+"LEASECODE": "t0000314",
+"SaleType": "apparel", 
+"SalesFromDATE": "12/01/2021", 
+"NetSalesAmount": 50000,
+"NoofTransactions": 100, 
+"SalesFrequency": "Monthly"
+}
+]

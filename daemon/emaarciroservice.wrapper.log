@@ -1,0 +1,20 @@
+2025-07-25 10:47:54 - Starting C:\Program Files\nodejs\node.exe  --harmony --max_old_space_size=4096 C:\proje\bdEmaarJS\node_modules\node-windows\lib\wrapper.js --file C:\proje\bdEmaarJS\index.js --scriptoptions= --log "EmaarCiroService wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2025-07-25 10:47:54 - Started 12504
+2025-07-28 13:21:48 - Starting C:\Program Files\nodejs\node.exe  --harmony --max_old_space_size=4096 C:\proje\bdEmaarJS\node_modules\node-windows\lib\wrapper.js --file C:\proje\bdEmaarJS\index.js --scriptoptions= --log "EmaarCiroService wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2025-07-28 13:21:48 - Started 4264
+2025-07-29 14:11:54 - Stopping emaarciroservice.exe
+2025-07-29 14:11:54 - ProcessKill 4264
+2025-07-29 14:11:54 - Found child process: 4316 Name: conhost.exe
+2025-07-29 14:11:54 - Found child process: 5612 Name: node.exe
+2025-07-29 14:11:54 - Stopping process 4316
+2025-07-29 14:11:54 - Send SIGINT 4316
+2025-07-29 14:11:54 - SIGINT to 4316 failed - Killing as fallback
+2025-07-29 14:11:54 - Stopping process 5612
+2025-07-29 14:11:54 - Send SIGINT 5612
+2025-07-29 14:11:54 - SIGINT to 5612 failed - Killing as fallback
+2025-07-29 14:11:54 - Stopping process 4264
+2025-07-29 14:11:54 - Send SIGINT 4264
+2025-07-29 14:11:54 - SIGINT to 4264 failed - Killing as fallback
+2025-07-29 14:11:54 - Finished emaarciroservice.exe
+2025-07-29 14:17:08 - Starting C:\Program Files\nodejs\node.exe  --harmony --max_old_space_size=4096 C:\proje\bdEmaarJS\node_modules\node-windows\lib\wrapper.js --file C:\proje\bdEmaarJS\index.js --scriptoptions= --log "EmaarCiroService wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2025-07-29 14:17:08 - Started 4548

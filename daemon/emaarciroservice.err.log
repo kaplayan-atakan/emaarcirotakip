@@ -1,0 +1,1937 @@
+❌ Otomatik görev hatası: Failed to connect to 172.16.14.2:1433 - Could not connect (sequence)
+📧❌ Aylık email gönderim hatası: Error: getaddrinfo ENOTFOUND mail.apazgroup.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+  errno: -3008,
+  code: 'EDNS',
+  syscall: 'getaddrinfo',
+  hostname: 'mail.apazgroup.com',
+  command: 'CONN'
+}
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+TypeError: Cannot destructure property 'upp' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1644:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+TypeError: Cannot destructure property 'username' of 'req.body' as it is undefined.
+    at C:\proje\bdEmaarJS\index.js:1653:13
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at C:\proje\bdEmaarJS\node_modules\router\index.js:295:15
+    at processParams (C:\proje\bdEmaarJS\node_modules\router\index.js:582:12)
+    at next (C:\proje\bdEmaarJS\node_modules\router\index.js:291:5)
+    at session (C:\proje\bdEmaarJS\node_modules\express-session\index.js:487:7)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+AD Login error: TypeError: Cannot read properties of undefined (reading 'toLowerCase')
+    at isUserAllowed (C:\proje\bdEmaarJS\index.js:224:41)
+    at C:\proje\bdEmaarJS\index.js:325:14
+    at new Promise (<anonymous>)
+    at authenticateAD (C:\proje\bdEmaarJS\index.js:323:12)
+    at C:\proje\bdEmaarJS\index.js:1657:39
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+    at next (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (C:\proje\bdEmaarJS\node_modules\router\lib\route.js:117:3)
+    at handle (C:\proje\bdEmaarJS\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (C:\proje\bdEmaarJS\node_modules\router\lib\layer.js:152:17)
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.18.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.17.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.17.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.17.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.16.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.16.2025, Hata: Request failed with status code 429
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.21.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.21.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.21.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.21.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.21.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.21.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.20.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.20.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.20.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.19.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.19.2025, Hata: Request failed with status code 429
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.24.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.24.2025, Hata: Request failed with status code 429
+❌ [HATA] Scheduler gönderim başarısız! Tarih: 08.24.2025, Hata: Request failed with status code 429
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
+📧❌ Email gönderim hatası: Error: Message failed: 432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]
+    at SMTPConnection._formatError (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection._actionSMTPStream (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1730:34)
+    at SMTPConnection.<anonymous> (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:1198:22)
+    at SMTPConnection._processResponse (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\proje\bdEmaarJS\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+    at TLSSocket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5) {
+  code: 'EMESSAGE',
+  response: '432 4.3.2 Concurrent connections limit exceeded. Visit https://aka.ms/concurrent_sending for more information. [Hostname=DUZPR10MB8268.EURPRD10.PROD.OUTLOOK.COM]',
+  responseCode: 432,
+  command: 'DATA'
+}
