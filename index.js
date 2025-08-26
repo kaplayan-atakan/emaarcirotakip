@@ -1179,6 +1179,18 @@ app.get('/', async (req, res) => {
                                     </div>
                                 </div>
                                 
+                                <!-- Özel Test Butonu (sadece atakan.kaplayan için) -->
+                                ${ (req.session?.adUser && req.session.adUser.toLowerCase().startsWith('atakan.kaplayan')) ? `
+                                <div style="margin: 15px 0 25px; padding:14px 16px; background:#fff8e1; border:1px solid #ffe8a3; border-radius:8px;">
+                                    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; justify-content:space-between;">
+                                        <div style="font-size:13px; color:#6c5500; line-height:1.4;">
+                                            <strong>Test Aracı:</strong> Geçmiş ay için LOG bazlı günlük gönderilmiş verileri ve oluşturulacak aylık özet hesaplamasını tek ekranda inceleyebilirsiniz.
+                                        </div>
+                                        <button onclick="runLastMonthDeepPreview()" style="padding:10px 18px; background:linear-gradient(135deg,#ff9800,#ffb74d); color:#222; font-weight:600; border:none; border-radius:8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.15);">🧪 Geçmiş Ay Derin Önizleme</button>
+                                    </div>
+                                    <div id="deepPreviewResult" style="margin-top:16px; display:none; background:#f8f9fa; border:1px solid #eceff3; border-radius:8px; padding:16px; max-height:480px; overflow:auto; font-size:12.5px; line-height:1.45;"></div>
+                                </div>` : '' }
+
                                 <!-- Preview Area -->
                                 <div id="monthlyPreview" style="display: none; background: #f8f9fa; border-radius: 8px; padding: 20px; margin-top: 20px; border-left: 4px solid #17a2b8;">
                                     <!-- Preview content will be populated by JavaScript -->
@@ -1395,6 +1407,77 @@ app.get('/', async (req, res) => {
                                 }
                             } catch (error) {
                                 console.error('History load error:', error);
+                            }
+                        }
+
+                        // Deep preview (geçmiş ay günlük + aylık özet) sadece yetkili kullanıcı
+                        async function runLastMonthDeepPreview() {
+                            const btn = event.target;
+                            const container = document.getElementById('deepPreviewResult');
+                            if (!container) return;
+                            try {
+                                btn.disabled = true; const original = btn.innerHTML; btn.innerHTML = 'Çalışıyor...';
+                                container.style.display = 'block';
+                                container.innerHTML = '<em>Yükleniyor...</em>';
+                                const resp = await fetch('/monthly-last-month-deep-preview');
+                                const data = await resp.json();
+                                if (!data.success) { container.innerHTML = 'Hata: '+ data.message; return; }
+                                const v = data.veri; const dwh = data.dwh || {}; const ayAd=['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+                                let html = '';
+                                html += '<div style="font-weight:600;font-size:14px;margin-bottom:8px;">📅 ' + ayAd[v.ay] + ' ' + v.yil + ' Derin Önizleme</div>';
+                                html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px;">' +
+                                    '<div style="background:#fff;padding:10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Toplam Ciro</div><div style="font-weight:600;color:#1e8e3e;">' + v.toplamCiro.toLocaleString('tr-TR') + '₺</div></div>' +
+                                    '<div style="background:#fff;padding:10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Toplam Kişi</div><div style="font-weight:600;color:#1d5fbf;">' + v.toplamKisi.toLocaleString('tr-TR') + '</div></div>' +
+                                    '<div style="background:#fff;padding:10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Gönderilen Gün</div><div style="font-weight:600;">' + v.gunSayisi + '</div></div>' +
+                                    '<div style="background:#fff;padding:10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Beklenen Gün</div><div style="font-weight:600;">' + v.beklenenGunSayisi + '</div></div>' +
+                                    '<div style="background:#fff;padding:10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Eksik Gün</div><div style="font-weight:600;color:' + (v.eksikGunler.length ? '#d35400' : '#16a34a') + ';">' + v.eksikGunler.length + '</div></div>' +
+                                '</div>';
+                                if (v.eksikGunler.length) {
+                                    html += '<div style="background:#fff3cd;border:1px solid #ffe69c;padding:8px 10px;border-radius:6px;font-size:12px;margin-bottom:10px;">Eksik Günler: ' + v.eksikGunler.join(', ') + '<br><button onclick="triggerAutoFillLastMonth()" style="margin-top:6px;padding:6px 10px;background:#ff9800;border:none;border-radius:5px;cursor:pointer;color:#222;font-weight:600;">⚙️ Auto-Fill Çalıştır</button></div>';
+                                }
+
+                                // DWH karşılaştırma alanı
+                                if (dwh && dwh.dwhToplamCiro !== null && dwh.dwhToplamCiro !== undefined) {
+                                    html += '<details open style="margin-top:10px;"><summary style="cursor:pointer;font-size:12px;font-weight:600;">DWH Karşılaştırma</summary>';
+                                    if (dwh.dwhError) {
+                                        html += '<div style="margin-top:6px;color:#b71c1c;font-size:12px;">DWH Hatası: ' + dwh.dwhError + '</div>';
+                                    } else {
+                                        const farkClr = Math.abs(parseFloat(dwh.farkYuzdeCiro||0)) > 0.5 ? '#d35400' : '#2e7d32';
+                                        html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:8px;font-size:12px;">' +
+                                            '<div style="background:#fff;padding:8px 10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="color:#667;font-size:11px;">DWH Toplam Ciro</div><div style="font-weight:600;">' + Number(dwh.dwhToplamCiro).toLocaleString('tr-TR') + '₺</div></div>' +
+                                            '<div style="background:#fff;padding:8px 10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="color:#667;font-size:11px;">LOG Toplam Ciro</div><div style="font-weight:600;">' + v.toplamCiro.toLocaleString('tr-TR') + '₺</div></div>' +
+                                            '<div style="background:#fff;padding:8px 10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="color:#667;font-size:11px;">Fark (₺)</div><div style="font-weight:600;color:'+farkClr+';">' + (dwh.farkCiro || '0.00') + '</div></div>' +
+                                            '<div style="background:#fff;padding:8px 10px;border:1px solid #e3e7ed;border-radius:6px;"><div style="color:#667;font-size:11px;">Fark (%)</div><div style="font-weight:600;color:'+farkClr+';">' + (dwh.farkYuzdeCiro || '0.00') + '%</div></div>' +
+                                        '</div>';
+                                    }
+                                    html += '</details>';
+                                }
+                                html += '<details open style="margin-top:6px;"><summary style="cursor:pointer;font-size:12px;font-weight:600;margin-bottom:6px;">Günlük Detaylar (' + v.detaylar.length + ')</summary>';
+                                html += '<table style="width:100%;border-collapse:collapse;font-size:11.5px;"><thead><tr style="background:#f2f4f7;"><th style="text-align:left;padding:4px 6px;border:1px solid #dfe3e8;">Tarih</th><th style="text-align:right;padding:4px 6px;border:1px solid #dfe3e8;">Ciro</th><th style="text-align:right;padding:4px 6px;border:1px solid #dfe3e8;">Kişi</th></tr></thead><tbody>' +
+                                    v.detaylar.map(function(d){ return '<tr><td style="padding:4px 6px;border:1px solid #eee;">'+ d.tarih +'</td><td style="padding:4px 6px;border:1px solid #eee;text-align:right;color:#1e8e3e;">'+ d.ciro.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}) +'</td><td style="padding:4px 6px;border:1px solid #eee;text-align:right;color:#1d5fbf;">'+ d.kisi.toLocaleString('tr-TR') +'</td></tr>'; }).join('') +
+                                    '</tbody></table></details>';
+                                container.innerHTML = html;
+                            } catch (e) {
+                                container.innerHTML = 'Hata: '+e.message;
+                            } finally {
+                                btn.disabled = false; btn.innerHTML = '🧪 Geçmiş Ay Derin Önizleme';
+                            }
+                        }
+
+                        async function triggerAutoFillLastMonth() {
+                            const btn = event.target;
+                            btn.disabled = true; const original = btn.innerHTML; btn.innerHTML = 'Çalışıyor...';
+                            try {
+                                const resp = await fetch('/monthly-last-month-autofill-run', { method:'POST' });
+                                const data = await resp.json();
+                                if (!data.success) { alert('Auto-Fill hata: '+ data.message); return; }
+                                alert('Auto-Fill tamamlandı.\nGönderilen: '+ data.sonuc.sentDays.length +'\nBulunamadı: '+ data.sonuc.notFoundDays.length +'\nHatalı: '+ data.sonuc.failedDays.length);
+                                // Yeniden derin önizleme yükle
+                                runLastMonthDeepPreview();
+                            } catch(e) {
+                                alert('Auto-Fill tetikleme hatası: '+ e.message);
+                            } finally {
+                                btn.disabled = false; btn.innerHTML = original;
                             }
                         }
                         
@@ -2289,6 +2372,66 @@ app.post('/monthly-preview', async (req, res) => {
             message: 'Veri önizleme sırasında hata oluştu',
             error: error.message
         });
+    }
+});
+
+// Derin önizleme (geçmiş ay) - sadece atakan.kaplayan erişimi
+app.get('/monthly-last-month-deep-preview', async (req, res) => {
+    try {
+        if (!req.session.adUser || !req.session.adUser.toLowerCase().startsWith('atakan.kaplayan')) {
+            return res.status(403).json({ success:false, message:'Forbidden' });
+        }
+        const now = new Date();
+        const past = new Date(now.getFullYear(), now.getMonth()-1, 1);
+        const yil = past.getFullYear();
+        const ay = past.getMonth()+1;
+        const veri = await monthlyOperations.aylikVeriHesapla(yil, ay);
+
+        // DWH toplamlarını getir ve fark hesapla
+        let dwhToplamCiro = null, dwhToplamKisi = null, dwhError = null;
+        const mm = ay.toString().padStart(2,'0');
+        let pool;
+        try {
+            pool = new sql.ConnectionPool(dwhConfig);
+            await pool.connect();
+            const q = await pool.request()
+                .input('pattern', sql.VarChar, `%.${mm}.${yil}`)
+                .query(`SELECT SUM(CAST(Ciro AS DECIMAL(18,2))) AS toplamCiro, SUM([Kişi Sayısı]) AS toplamKisi FROM [DWH].[dbo].[FactKisiSayisiCiro] WHERE [Şube Kodu]=17672 AND Tarih LIKE @pattern`);
+            dwhToplamCiro = parseFloat(q.recordset[0].toplamCiro || 0).toFixed(2);
+            dwhToplamKisi = parseInt(q.recordset[0].toplamKisi || 0,10);
+        } catch(e) {
+            dwhError = e.message;
+        } finally { if (pool) try { await pool.close(); } catch(_){} }
+
+        let farkCiro = null, farkKisi = null, farkYuzdeCiro = null;
+        if (dwhToplamCiro !== null) {
+            farkCiro = (parseFloat(veri.toplamCiro) - parseFloat(dwhToplamCiro)).toFixed(2);
+            farkKisi = (veri.toplamKisi - dwhToplamKisi);
+            if (parseFloat(dwhToplamCiro) !== 0) {
+                farkYuzdeCiro = ((parseFloat(farkCiro)/parseFloat(dwhToplamCiro))*100).toFixed(2);
+            }
+        }
+
+        return res.json({ success:true, veri, dwh: { dwhToplamCiro, dwhToplamKisi, farkCiro, farkKisi, farkYuzdeCiro, dwhError } });
+    } catch (e) {
+        return res.status(500).json({ success:false, message:e.message });
+    }
+});
+
+// Manuel auto-fill tetikleme (geçmiş ay) - sadece atakan.kaplayan
+app.post('/monthly-last-month-autofill-run', async (req, res) => {
+    try {
+        if (!req.session.adUser || !req.session.adUser.toLowerCase().startsWith('atakan.kaplayan')) {
+            return res.status(403).json({ success:false, message:'Forbidden' });
+        }
+        const now = new Date();
+        const past = new Date(now.getFullYear(), now.getMonth()-1, 1);
+        const yil = past.getFullYear();
+        const ay = past.getMonth()+1;
+        const sonuc = await monthlyOperations.tamamlaEksikGunler(yil, ay);
+        return res.json({ success:true, sonuc });
+    } catch(e) {
+        return res.status(500).json({ success:false, message:e.message });
     }
 });
 
