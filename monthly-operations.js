@@ -5,6 +5,9 @@ const nodemailer = require('nodemailer');
 // Konfigürasyonlar (index.js'den alınacak)
 let dwhConfig, restoConfig, API_URL, API_HEADERS;
 
+// Harici hata email fonksiyonu enjekte edilebilsin (opsiyonel)
+let externalErrorNotifier = null;
+
 // Email transporter
 const transporter = nodemailer.createTransport({
     host: 'mail.apazgroup.com',
@@ -27,118 +30,162 @@ function setConfig(dwh, resto, apiUrl, apiHeaders) {
     API_HEADERS = apiHeaders;
 }
 
-// 📊 Aylık veri hesaplama fonksiyonu (Seçenek 1: RESTO LOG ENTEGRASYONu)
-async function aylikVeriHesapla(yil, ay) {
-    let dwhPool = null;
-    let restoPool = null;
-    
+// Opsiyonel olarak index.js'deki sendErrorEmail fonksiyonu enjekte edilebilir
+function setErrorNotifier(fn) {
+    if (typeof fn === 'function') {
+        externalErrorNotifier = fn;
+    }
+}
+
+// Dahili aylık hata emaili (externalErrorNotifier yoksa kullanılır)
+async function sendMonthlyErrorEmail({ stage = 'UNKNOWN', yil = null, ay = null, errorMessage = 'Bilinmeyen hata', errorStack = '', context = {} }) {
+    if (externalErrorNotifier) {
+        // Ortak mekanizma kullan
+        return externalErrorNotifier({
+            kullanici: 'SYSTEM: Monthly Ops',
+            source: `MONTHLY_${stage}`,
+            errorMessage,
+            errorStack
+        });
+    }
     try {
-        console.log(`📊 Aylık veri hesaplanıyor: ${ay}/${yil}`);
-        
-        // DWH bağlantısı
-        dwhPool = new sql.ConnectionPool(dwhConfig);
-        await dwhPool.connect();
-        
-        // RESTO bağlantısı
+        const t = nodemailer.createTransport({
+            host: 'smtp.office365.com',
+            port: 25,
+            secure: false,
+            auth: { user: 'alert@apazgroup.com', pass: 'dxvybfdrbtfpfbfl' }
+        });
+        const period = (yil && ay) ? `${ay}/${yil}` : 'Bilinmiyor';
+        const html = `
+        <div style="font-family:Segoe UI,Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;border:1px solid #eee;border-radius:8px;overflow:hidden">
+            <div style="background:#6f42c1;color:#fff;padding:16px 22px">
+                <h2 style="margin:0;font-size:18px">� Aylık İşlem Hatası</h2>
+            </div>
+            <div style="padding:20px;font-size:13px;color:#333;line-height:1.5">
+                <p><strong>Aşama:</strong> ${stage}</p>
+                <p><strong>Dönem:</strong> ${period}</p>
+                <p><strong>Hata:</strong><br><code style="background:#f8f9fa;padding:6px 8px;border-radius:4px;display:inline-block;white-space:pre-wrap;max-width:100%">${errorMessage}</code></p>
+                ${Object.keys(context).length ? `<pre style='background:#272822;color:#f8f8f2;padding:12px;border-radius:6px;overflow:auto;max-height:260px'>${JSON.stringify(context,null,2).replace(/</g,'&lt;')}</pre>` : ''}
+                ${errorStack ? `<details style='margin-top:10px'><summary style='cursor:pointer'>Stack Trace</summary><pre style='background:#272822;color:#f8f8f2;padding:12px;border-radius:6px;overflow:auto;max-height:320px'>${errorStack.replace(/</g,'&lt;')}</pre></details>` : ''}
+                <p style="margin-top:16px;font-size:11px;color:#666">Bu e-posta aylık görev hata bildirimi için otomatik oluşturuldu.</p>
+            </div>
+        </div>`;
+        await t.sendMail({
+            from: 'alert@apazgroup.com',
+            to: 'atakan.kaplayan@apazgroup.com',
+            subject: `🚨 Aylık İşlem Hatası - ${period} - ${stage}`,
+            html
+        });
+        console.log('📧❗ Aylık hata emaili gönderildi');
+    } catch (mailErr) {
+        console.error('📧❌ Aylık hata emaili gönderilemedi:', mailErr.message);
+    }
+}
+
+//  Aylık veri hesaplama (Yeni Mantık: Günlük gönderilmiş LOG verisi baz alınır)
+async function aylikVeriHesapla(yil, ay) {
+    let restoPool = null;
+    let dwhPool = null; // sadece eksik günler için opsiyonel kontrol
+    try {
+        console.log(`📊 (YENI) Aylık veri LOG üzerinden hesaplanıyor: ${ay}/${yil}`);
+        const mm = ay.toString().padStart(2,'0');
+        const daysInMonth = new Date(yil, ay, 0).getDate();
+
+        // Beklenen gün listesi
+        const expectedDates = [];
+        for (let d=1; d<=daysInMonth; d++) {
+            expectedDates.push(`${d.toString().padStart(2,'0')}.${mm}.${yil}`);
+        }
+
         restoPool = new sql.ConnectionPool(restoConfig);
         await restoPool.connect();
-        
-        // DWH'dan o aya ait tüm günlerin verisini al
-        const ayBaslangic = `01.${ay.toString().padStart(2, '0')}.${yil}`;
-        const aySon = new Date(yil, ay, 0).getDate(); // Ayın son günü
-        const aySonTarih = `${aySon.toString().padStart(2, '0')}.${ay.toString().padStart(2, '0')}.${yil}`;
-        
-        console.log(`📅 Tarih aralığı: ${ayBaslangic} - ${aySonTarih}`);
-        
-        const dwhResult = await dwhPool.request()
+
+        // LOG'da gönderilmiş başarılı günlük kayıtlar
+        const logResult = await restoPool.request()
+            .input('pattern', sql.VarChar, `%.${mm}.${yil}`)
             .query(`
-                SELECT 
-                    Tarih,
-                    Ciro,
-                    [Kişi Sayısı] as KisiSayisi
-                FROM [DWH].[dbo].[FactKisiSayisiCiro] 
-                WHERE [Şube Kodu] = 17672 
-                AND CONVERT(datetime, Tarih, 104) >= CONVERT(datetime, '${ayBaslangic}', 104)
-                AND CONVERT(datetime, Tarih, 104) <= CONVERT(datetime, '${aySonTarih}', 104)
-                ORDER BY CONVERT(datetime, Tarih, 104) ASC
+                SELECT veri3 as tarih, veri1 as ciro, veri2 as kisi
+                FROM basar.personelLog
+                WHERE statuscode = 201
+                  AND tablo = 'ciro'
+                  AND veri3 LIKE @pattern
             `);
-        
-        console.log(`📈 DWH'dan alınan gün sayısı: ${dwhResult.recordset.length}`);
-        
+
+        const logMap = new Map();
+        for (const row of logResult.recordset) {
+            const tarih = row.tarih?.trim();
+            if (!tarih) continue;
+            // Aynı güne birden çok başarılı gönderim varsa en son/son değeri baz al (overwrite)
+            const ciro = parseFloat((row.ciro||'0').toString().replace(',','.')) || 0;
+            const kisi = parseInt((row.kisi||'0'),10) || 0;
+            logMap.set(tarih, { ciro, kisi, kaynak: 'LOG' });
+        }
+
         let toplamCiro = 0;
         let toplamKisi = 0;
-        let islemDetaylari = [];
-        
-        // Her gün için manuel gönderim kontrolü yap
-        for (const row of dwhResult.recordset) {
-            const tarih = row.Tarih;
-            let ciro = parseFloat(row.Ciro);
-            let kisi = parseInt(row.KisiSayisi);
-            let kaynak = 'DWH';
-            
-            // Tarihi uygun formata çevir (dd.mm.yyyy)
-            const tariharr = tarih.split('.');
-            const formattedTarih = tariharr[1] + '.' + tariharr[0].padStart(2, '0') + '.' + tariharr[2];
-            
-            // Manuel gönderim kontrolü
-            const manuelResult = await restoPool.request()
-                .input('tarih', sql.VarChar, formattedTarih)
-                .query(`
-                    SELECT TOP 1 
-                        veri1 as sentCiro,
-                        veri2 as sentKisi,
-                        kullanici,
-                        tarih as gonderimTarihi
-                    FROM basar.personelLog 
-                    WHERE veri3 = @tarih 
-                    AND statuscode = 201 
-                    AND tablo = 'ciro'
-                    ORDER BY tarih DESC
-                `);
-            
-            // Manuel gönderim varsa o veriyi kullan
-            if (manuelResult.recordset.length > 0) {
-                const manuelVeri = manuelResult.recordset[0];
-                if (manuelVeri.sentCiro && !isNaN(parseFloat(manuelVeri.sentCiro))) {
-                    ciro = parseFloat(manuelVeri.sentCiro);
-                    kaynak = 'MANUEL';
-                }
-                if (manuelVeri.sentKisi && !isNaN(parseInt(manuelVeri.sentKisi))) {
-                    kisi = parseInt(manuelVeri.sentKisi);
-                }
+        const detaylar = [];
+        const missingDays = [];
+
+        for (const dt of expectedDates) {
+            if (logMap.has(dt)) {
+                const rec = logMap.get(dt);
+                toplamCiro += rec.ciro;
+                toplamKisi += rec.kisi;
+                detaylar.push({ tarih: dt, ciro: rec.ciro, kisi: rec.kisi, kaynak: rec.kaynak });
+            } else {
+                missingDays.push(dt);
             }
-            
-            toplamCiro += ciro;
-            toplamKisi += kisi;
-            
-            islemDetaylari.push({
-                tarih: formattedTarih,
-                ciro: ciro,
-                kisi: kisi,
-                kaynak: kaynak
-            });
         }
-        
-        console.log(`💰 Toplam Ciro: ${toplamCiro.toFixed(2)}₺`);
-        console.log(`👥 Toplam Kişi: ${toplamKisi}`);
-        console.log(`📊 Manuel düzeltme: ${islemDetaylari.filter(x => x.kaynak === 'MANUEL').length} gün`);
-        
+
+        // Eksik günleri opsiyonel DWH doğrulaması ile raporlamak için (toplama dahil etmiyoruz!)
+        let dwhEksikDetay = [];
+        if (missingDays.length > 0) {
+            try {
+                dwhPool = new sql.ConnectionPool(dwhConfig);
+                await dwhPool.connect();
+                // DWH'den eksik günler için veri al
+                const inClause = missingDays.map(d => `CONVERT(datetime,'${d}',104)`).join(',');
+                const dwhMissingQuery = `
+                    SELECT Tarih, Ciro, [Kişi Sayısı] AS Kisi
+                    FROM [DWH].[dbo].[FactKisiSayisiCiro]
+                    WHERE [Şube Kodu] = 17672
+                      AND CONVERT(datetime, Tarih, 104) IN (${inClause})
+                `;
+                const dwhMissing = await dwhPool.request().query(dwhMissingQuery);
+                dwhEksikDetay = dwhMissing.recordset.map(r => ({
+                    tarih: r.Tarih,
+                    ciro: parseFloat(r.Ciro),
+                    kisi: parseInt(r.Kisi,10),
+                    kaynak: 'DWH_ONLY'
+                }));
+            } catch(e) {
+                console.warn('⚠️ Eksik günler için DWH doğrulama yapılamadı:', e.message);
+            }
+        }
+
+        console.log(`💰 Toplam Ciro (LOG): ${toplamCiro.toFixed(2)}₺`);
+        console.log(`👥 Toplam Kişi (LOG): ${toplamKisi}`);
+        console.log(`� Beklenen Gün: ${daysInMonth}, Gönderilmiş Gün: ${detaylar.length}, Eksik: ${missingDays.length}`);
+
         return {
             yil,
             ay,
             toplamCiro: parseFloat(toplamCiro.toFixed(2)),
             toplamKisi,
-            gunSayisi: islemDetaylari.length,
-            manuelDuzeltmeSayisi: islemDetaylari.filter(x => x.kaynak === 'MANUEL').length,
-            detaylar: islemDetaylari
+            gunSayisi: detaylar.length,
+            beklenenGunSayisi: daysInMonth,
+            eksikGunler: missingDays,
+            eksikGunDwhDetay: dwhEksikDetay, // referans amaçlı
+            manuelDuzeltmeSayisi: 0, // Eski alan korunuyor (artık LOG tabanlı)
+            detaylar
         };
-        
     } catch (error) {
         console.error('❌ Aylık veri hesaplama hatası:', error);
+        await sendMonthlyErrorEmail({ stage: 'VERI_HESAPLA', yil, ay, errorMessage: error.message, errorStack: error.stack });
         throw error;
     } finally {
-        if (dwhPool) await dwhPool.close();
         if (restoPool) await restoPool.close();
+        if (dwhPool) await dwhPool.close();
     }
 }
 
@@ -187,6 +234,7 @@ async function aylikGonderimKontrol(yil, ay) {
         
     } catch (error) {
         console.error('❌ Aylık gönderim kontrol hatası:', error);
+    await sendMonthlyErrorEmail({ stage: 'GONDERIM_KONTROL', yil, ay, errorMessage: error.message, errorStack: error.stack });
         throw error;
     } finally {
         if (restoPool) await restoPool.close();
@@ -194,7 +242,7 @@ async function aylikGonderimKontrol(yil, ay) {
 }
 
 // 🌐 Monthly Sales API gönderim fonksiyonu
-async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi = 'SYSTEM') {
+async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi = 'SYSTEM', gunSayisi = 30, gunlukDetaylar = []) {
     let restoPool = null;
     
     try {
@@ -258,7 +306,7 @@ async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
             `);
         
         // Email gönder
-        await sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi);
+    await sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi, gunSayisi, gunlukDetaylar);
         
         console.log(`✅ [BAŞARILI] Aylık veri gönderildi! API Status: ${response.status}, Dönem: ${ay}/${yil}`);
         
@@ -292,7 +340,7 @@ async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
                 (yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi, apiCevap, durum) 
                 VALUES (@yil, @ay, @toplamCiro, @toplamKisi, @kullaniciTipi, @kullaniciAdi, @apiCevap, @durum)
             `);
-        
+    await sendMonthlyErrorEmail({ stage: 'API_GONDER', yil, ay, errorMessage: error.message, errorStack: error.stack, context: { toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi } });
         throw error;
     } finally {
         if (restoPool) await restoPool.close();
@@ -300,15 +348,23 @@ async function monthlyApiGonder(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
 }
 
 // 📧 Aylık email gönderim fonksiyonu
-async function sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi) {
+async function sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, kullaniciAdi, gunSayisi = 30, gunlukDetaylar = []) {
     const ayAdlari = [
         '', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
         'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
     ];
     
     const donem = `${ayAdlari[ay]} ${yil}`;
-    const ortalamaGunlukCiro = (toplamCiro / 30).toFixed(2);
-    const ortalamaGunlukKisi = Math.round(toplamKisi / 30);
+    const divisor = gunSayisi > 0 ? gunSayisi : 1;
+    const ortalamaGunlukCiro = (toplamCiro / divisor).toFixed(2);
+    const ortalamaGunlukKisi = Math.round(toplamKisi / divisor);
+    
+    // Günlük detayları tarihe göre sırala
+    const siraliDetaylar = [...gunlukDetaylar].sort((a, b) => {
+        const dateA = new Date(a.tarih.split('.').reverse().join('-'));
+        const dateB = new Date(b.tarih.split('.').reverse().join('-'));
+        return dateA - dateB;
+    });
     
     const mailOptions = {
         from: 'sistem@apazgroup.com',
@@ -366,6 +422,53 @@ async function sendMonthlyEmail(yil, ay, toplamCiro, toplamKisi, kullaniciTipi, 
                         </div>
                     </div>
                     
+                    ${siraliDetaylar.length > 0 ? `
+                    <div style="background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+                        <h3 style="color: #495057; margin: 0 0 20px 0; font-size: 16px;">📊 Günlük Gönderimler Tablosu</h3>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr style="background: #f8f9fa;">
+                                        <th style="padding: 12px 8px; text-align: left; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Tarih</th>
+                                        <th style="padding: 12px 8px; text-align: right; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Ciro (₺)</th>
+                                        <th style="padding: 12px 8px; text-align: right; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Kişi Sayısı</th>
+                                        <th style="padding: 12px 8px; text-align: center; border: 1px solid #dee2e6; font-weight: 600; color: #495057;">Kaynak</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${siraliDetaylar.map((detay, index) => `
+                                        <tr style="background: ${index % 2 === 0 ? '#fff' : '#f8f9fa'};">
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; color: #495057;">${detay.tarih}</td>
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: right; color: #27ae60; font-weight: 500;">${detay.ciro.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: right; color: #3498db; font-weight: 500;">${detay.kisi.toLocaleString('tr-TR')}</td>
+                                            <td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: center;">
+                                                <span style="background: ${detay.kaynak === 'LOG' ? '#28a745' : '#6c757d'}; color: white; padding: 3px 6px; border-radius: 3px; font-size: 11px; font-weight: 500;">
+                                                    ${detay.kaynak === 'LOG' ? 'Gönderildi' : detay.kaynak}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                                <tfoot>
+                                    <tr style="background: #e9ecef; font-weight: 600;">
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; color: #495057;">TOPLAM</td>
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; text-align: right; color: #27ae60; font-weight: bold;">${toplamCiro.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; text-align: right; color: #3498db; font-weight: bold;">${toplamKisi.toLocaleString('tr-TR')}</td>
+                                        <td style="padding: 12px 8px; border: 1px solid #dee2e6; text-align: center; color: #495057;">${siraliDetaylar.length} gün</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        ${gunSayisi < new Date(yil, ay, 0).getDate() ? `
+                        <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 6px; border-left: 3px solid #ffc107;">
+                            <p style="margin: 0; color: #856404; font-size: 13px;">
+                                ⚠️ <strong>Not:</strong> Bu ay toplam ${new Date(yil, ay, 0).getDate()} gün olmasına rağmen ${gunSayisi} gün verisi gönderilmiştir. ${new Date(yil, ay, 0).getDate() - gunSayisi} gün eksik.
+                            </p>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
                     <div style="margin-top: 25px; padding: 15px; background: #d4edda; border-radius: 8px; border-left: 4px solid #28a745;">
                         <p style="margin: 0; color: #155724; font-size: 14px;">
                             ✅ <strong>Başarılı:</strong> ${donem} dönemi aylık ciro raporu Emaar Monthly Sales API'sine başarıyla gönderilmiştir.
@@ -417,6 +520,7 @@ async function getAylikGonderimGecmisi(limit = 12) {
         
     } catch (error) {
         console.error('❌ Aylık gönderim geçmişi alınamadı:', error);
+    await sendMonthlyErrorEmail({ stage: 'GECMIS_OKU', errorMessage: error.message, errorStack: error.stack, context: { limit } });
         return [];
     } finally {
         if (restoPool) await restoPool.close();
@@ -425,9 +529,136 @@ async function getAylikGonderimGecmisi(limit = 12) {
 
 module.exports = {
     setConfig,
+    setErrorNotifier,
     aylikVeriHesapla,
     aylikGonderimKontrol,
     monthlyApiGonder,
     sendMonthlyEmail,
-    getAylikGonderimGecmisi
+    getAylikGonderimGecmisi,
+    tamamlaEksikGunler
 };
+
+// 🔄 Eksik günlük verileri otomatik (manuel gibi) tamamlama
+async function tamamlaEksikGunler(yil, ay) {
+    console.log(`🔄 Eksik gün tamamlama başlıyor: ${ay}/${yil}`);
+    let restoPool = null;
+    let dwhPool = null;
+    const baslangic = Date.now();
+    try {
+        const ilkVeri = await aylikVeriHesapla(yil, ay); // mevcut eksikleri al
+        if (ilkVeri.eksikGunler.length === 0) {
+            console.log('✅ Eksik gün yok, tamamlama gerekmiyor');
+            return { success: true, alreadyComplete: true, sentDays: [], notFoundDays: [], failedDays: [], durationMs: Date.now()-baslangic };
+        }
+
+        restoPool = new sql.ConnectionPool(restoConfig);
+        await restoPool.connect();
+        dwhPool = new sql.ConnectionPool(dwhConfig);
+        await dwhPool.connect();
+
+        const sentDays = [];
+        const notFoundDays = [];
+        const failedDays = [];
+
+        for (const dt of ilkVeri.eksikGunler) {
+            const [dd, mm, yyyy] = dt.split('.');
+            const isoDate = `${yyyy}-${mm}-${dd}`;
+
+            // DWH'den gün verisi
+            let dwhRec;
+            try {
+                const r = await dwhPool.request()
+                    .input('tarih', sql.VarChar, dt)
+                    .query(`SELECT TOP 1 Tarih, CAST(Ciro AS DECIMAL(18,2)) AS Ciro, [Kişi Sayısı] AS Kisi FROM [DWH].[dbo].[FactKisiSayisiCiro] WHERE [Şube Kodu] = 17672 AND Tarih = @tarih`);
+                if (r.recordset.length === 0) {
+                    console.warn(`⚠️ DWH'de bulunamadı: ${dt}`);
+                    notFoundDays.push(dt);
+                    continue;
+                }
+                dwhRec = r.recordset[0];
+            } catch (e) {
+                console.error(`❌ DWH sorgu hatası (${dt}):`, e.message);
+                failedDays.push(dt);
+                continue;
+            }
+
+            // Idempotent kontrol (bir yandan başka process eklemiş mi?)
+            try {
+                const kontrol = await restoPool.request()
+                    .input('tarih', sql.VarChar, dt)
+                    .query(`SELECT TOP 1 1 FROM basar.personelLog WHERE veri3 = @tarih AND tablo='ciro' AND statuscode=201`);
+                if (kontrol.recordset.length > 0) {
+                    console.log(`ℹ️ Zaten gönderilmiş (yarış durumu): ${dt}`);
+                    sentDays.push(dt);
+                    continue;
+                }
+            } catch (e) {
+                console.warn('Idempotent kontrol hatası:', e.message);
+            }
+
+            const ciro = parseFloat(dwhRec.Ciro).toFixed(2);
+            const kisi = parseInt(dwhRec.Kisi,10);
+            const payload = [{
+                SalesFromDATE: isoDate,
+                SalesToDATE: isoDate,
+                NetSalesAmount: parseFloat(ciro),
+                NoofTransactions: kisi,
+                SalesFrequency: 'Daily',
+                PropertyCode: 'ESM',
+                LeaseCode: 't0000967',
+                SaleType: 'food'
+            }];
+
+            try {
+                const resp = await axios.post(API_URL, payload, { headers: API_HEADERS });
+                await restoPool.request()
+                    .input('tarih', sql.DateTime, new Date())
+                    .input('ip', sql.VarChar, 'AUTO-FILL')
+                    .input('kullanici', sql.VarChar, 'SYSTEM: Missing Day AutoFill')
+                    .input('tablo', sql.VarChar, 'ciro')
+                    .input('veri', sql.Text, JSON.stringify(payload))
+                    .input('veri1', sql.VarChar, ciro)
+                    .input('veri2', sql.VarChar, kisi.toString())
+                    .input('veri3', sql.VarChar, dt)
+                    .input('cevap', sql.Text, JSON.stringify(resp.data))
+                    .input('statuscode', sql.Int, resp.status)
+                    .query(`INSERT INTO basar.personelLog (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode) VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);
+                console.log(`✅ Eksik gün gönderildi: ${dt}`);
+                sentDays.push(dt);
+            } catch (e) {
+                console.error(`❌ Günlük auto-fill gönderim hatası (${dt}):`, e.message);
+                failedDays.push(dt);
+                try {
+                    await restoPool.request()
+                        .input('tarih', sql.DateTime, new Date())
+                        .input('ip', sql.VarChar, 'AUTO-FILL')
+                        .input('kullanici', sql.VarChar, 'SYSTEM: Missing Day AutoFill')
+                        .input('tablo', sql.VarChar, 'ciro_error')
+                        .input('veri', sql.Text, JSON.stringify({ payload, error: e.message }))
+                        .input('veri1', sql.VarChar, ciro)
+                        .input('veri2', sql.VarChar, kisi.toString())
+                        .input('veri3', sql.VarChar, dt)
+                        .input('cevap', sql.Text, e.stack || '')
+                        .input('statuscode', sql.Int, 500)
+                        .query(`INSERT INTO basar.personelLog (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode) VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);
+                } catch (logErr) {
+                    console.error('Ek hata loglanamadı:', logErr.message);
+                }
+            }
+        }
+
+        return {
+            success: failedDays.length === 0 && notFoundDays.length === 0,
+            sentDays,
+            notFoundDays,
+            failedDays,
+            durationMs: Date.now()-baslangic
+        };
+    } catch (error) {
+        await sendMonthlyErrorEmail({ stage: 'EKSİK_GUN_TAMAMLA', yil, ay, errorMessage: error.message, errorStack: error.stack });
+        throw error;
+    } finally {
+        if (restoPool) await restoPool.close();
+        if (dwhPool) await dwhPool.close();
+    }
+}

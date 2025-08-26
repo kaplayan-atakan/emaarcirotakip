@@ -1,0 +1,1 @@
+// Moved from root on 2025-08-26. See git history for original implementation.
