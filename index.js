@@ -403,6 +403,32 @@ async function gonderimDurum(tarih) {
             };
         }
 
+        // 🔁 GERİYE DÖNÜK UYUMLULUK: Eski kayıtlar farklı (gun.ay.yil veya ay.gun.yil) formatında olabilir.
+        // Eğer ilk sorgu sonuç vermediyse ve tarih pattern'i dd.mm.yyyy ise ay/gün swap edilerek tekrar denenir.
+        if (/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(tarih)) {
+            const [p1, p2, y] = tarih.split('.');
+            // Eğer ilk iki parça farklı ve biri 12'den büyükse swap denemek mantıklı (örn 13.01.2025 -> 01.13.2025 anlamsız, bu yüzden >12 kontrolü)
+            // Ancak eski bug ay-gün tersliği ise (03.07.2025 yerine 07.03.2025) her iki parça da <=12 olabilir; bu durumda yine de bir deneme yapılabilir.
+            const swapped = `${p2.padStart(2,'0')}.${p1.padStart(2,'0')}.${y}`;
+            if (swapped !== tarih) {
+                const altResult = await pool.request()
+                    .input('tarih', sql.VarChar, swapped)
+                    .query(query);
+                if (altResult.recordset.length > 0) {
+                    const record = altResult.recordset[0];
+                    return {
+                        exists: true,
+                        sent: true,
+                        record_id: null,
+                        sent_date: record.logTarihi,
+                        created_date: record.logTarihi,
+                        note: 'alternate_date_format_match',
+                        matched_format: swapped
+                    };
+                }
+            }
+        }
+
         return {
             exists: false,
             sent: false,
@@ -525,6 +551,45 @@ async function sendEmail(ciro, kisi, tarih, kullanici) {
     } catch (error) {
         console.error('📧❌ Email gönderim hatası:', error);
     }
+}
+
+// ❗ Emaar API hata durumlarında uyarı emaili
+async function sendErrorEmail({ ciro = null, kisi = null, tarih = null, kullanici = 'SYSTEM', source = 'UNKNOWN', errorMessage = 'Bilinmeyen hata', errorStack = '' }) {
+        try {
+                const transporter = nodemailer.createTransport({
+                        host: 'smtp.office365.com',
+                        port: 25,
+                        secure: false,
+                        auth: { user: 'alert@apazgroup.com', pass: 'dxvybfdrbtfpfbfl' }
+                });
+
+                const html = `
+                <div style="font-family:Segoe UI,Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;border:1px solid #eee;border-radius:8px;overflow:hidden">
+                    <div style="background:#dc3545;color:#fff;padding:16px 22px">
+                        <h2 style="margin:0;font-size:18px">🚨 Emaar API Gönderim Hatası</h2>
+                    </div>
+                    <div style="padding:22px;color:#333;line-height:1.5;font-size:14px">
+                        <p><strong>Kaynak:</strong> ${source}</p>
+                        ${tarih ? `<p><strong>Tarih:</strong> ${tarih}</p>` : ''}
+                        ${ciro !== null ? `<p><strong>Ciro:</strong> ${ciro}</p>` : ''}
+                        ${kisi !== null ? `<p><strong>Kişi:</strong> ${kisi}</p>` : ''}
+                        <p><strong>Kullanıcı / Process:</strong> ${kullanici}</p>
+                        <p style="margin-top:14px"><strong>Hata Mesajı:</strong><br><code style="background:#f8f9fa;padding:6px 8px;border-radius:4px;display:inline-block;white-space:pre-wrap;max-width:100%">${errorMessage}</code></p>
+                        ${errorStack ? `<details style=\"margin-top:10px\"><summary style=\"cursor:pointer;color:#555\">Stack Trace</summary><pre style=\"background:#272822;color:#f8f8f2;padding:12px;border-radius:6px;overflow:auto;font-size:12px;max-height:300px\">${errorStack.replace(/</g,'&lt;')}</pre></details>` : ''}
+                        <p style="margin-top:18px;font-size:11px;color:#666">Bu e-posta otomatik oluşturulmuştur.</p>
+                    </div>
+                </div>`;
+
+                await transporter.sendMail({
+                        from: 'alert@apazgroup.com',
+                        to: 'atakan.kaplayan@apazgroup.com',
+                        subject: `🚨 EMAAR API Hatası - ${tarih || 'Tarih Yok'} - ${source}`,
+                        html
+                });
+                console.log('📧❗ Hata emaili gönderildi');
+        } catch (e) {
+                console.error('📧❌ Hata emaili gönderilemedi:', e.message);
+        }
 }
 
 // Routes
@@ -817,11 +882,9 @@ app.get('/', async (req, res) => {
                     let kisi = row["Kişi Sayısı"];
                     const tarih = row.Tarih;
 
-                    const tariharr = tarih.split('.');
-                    const formattedTarih = tariharr[1] + '.' + tariharr[0].padStart(2, '0') + '.' + tariharr[2];
-
-                    // 🔍 Gönderilmiş veri kontrolü ve personelLog'dan gerçek ciro değerini al
-                    const durumKontrol = await gonderimDurum(formattedTarih);
+                    // TARİH NORMALİZASYONU: Uygulama genelinde DD.MM.YYYY kullan
+                    // 🔍 Gönderilmiş veri kontrolü (ARTIK normalizasyon YOK - ham DWH tarih değeri kullanılır)
+                    const durumKontrol = await gonderimDurum(tarih);
                     const isGonderilmis = durumKontrol.sent;
                     // ✅ Eğer gönderilmişse, personelLog'daki ciro ve kişi değerlerini kullan
                     if (isGonderilmis) {
@@ -830,7 +893,7 @@ app.get('/', async (req, res) => {
                             await logPool.connect();
 
                             const logResult = await logPool.request()
-                                .input('tarih', sql.VarChar, formattedTarih)
+                                .input('tarih', sql.VarChar, tarih)
                                 .query(`
                                 SELECT TOP 1 
                                     veri1 as sentCiro,
@@ -873,7 +936,7 @@ app.get('/', async (req, res) => {
                                 <input type="number" name="kisi" value="${kisi}" style="width: 80px; padding: 5px;" required>
                         </td>
                         <td>
-                                <input type="text" name="tarih" value="${formattedTarih}" readonly style="width: 100px; padding: 5px; background: #f5f5f5;">
+                                <input type="text" name="tarih" value="${tarih}" readonly style="width: 100px; padding: 5px; background: #f5f5f5;">
                         </td>
                         <td>
                                 <button type="submit" class="${buttonClass}" style="padding: 8px 12px;">${buttonText}</button>
@@ -1877,6 +1940,19 @@ app.post('/send', requireLogin, async (req, res) => {
                     (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode) 
                     VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);
 
+        try {
+            await sendErrorEmail({
+                ciro,
+                kisi,
+                tarih,
+                kullanici: fullUserInfo,
+                source: 'MANUAL_SEND',
+                errorMessage: err.message,
+                errorStack: err.stack || ''
+            });
+        } catch (mailErr) {
+            console.error('Hata emaili gönderilemedi (MANUAL_SEND):', mailErr.message);
+        }
         res.status(500).send('Send error: ' + err.message);
     } finally {
         if (restoPool) {
@@ -1885,198 +1961,131 @@ app.post('/send', requireLogin, async (req, res) => {
     }
 });
 
-// 🚀 PRODUCTION - Zamanlanmış Görev - Her 3 günde bir çalışır
-// ✨ REFACTORED: Artık sadece gonderimDurum() fonksiyonunu kullanır
-schedule.scheduleJob('0 17 */3 * *', async () => {
-    console.log('🚀 [PRODUCTION] Otomatik görev başlatıldı - 3 günlük periyot:', new Date().toLocaleString('tr-TR'));
+// 🚀 GÜNLÜK SCHEDULER - Her gün 17:00'da "dünkü" günü gönderir
+// Tek tarih işlenir, tarih formatı DD.MM.YYYY olarak normalize edildi
+schedule.scheduleJob('0 17 * * *', async () => {
+    const now = new Date();
+    const target = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1); // dün
+    const dd = String(target.getDate()).padStart(2, '0');
+    const mm = String(target.getMonth() + 1).padStart(2, '0');
+    const yyyy = target.getFullYear();
+    const trDate = `${dd}.${mm}.${yyyy}`; // Log & DB format
+    const isoDate = `${yyyy}-${mm}-${dd}`; // API format
+
+    console.log(`🚀 [DAILY] Otomatik günlük görev başladı - Hedef Tarih: ${trDate} (${isoDate})`);
+
+    let dwhPool;
     let restoPool;
-
     try {
-        // 🚀 DWH bağlantısı - Liste ekranıyla aynı yöntem
-        const dwhPool = new sql.ConnectionPool(dwhConfig);
-        await dwhPool.connect();
-        console.log('✅ DWH veritabanı bağlantısı kuruldu');
+        // 1. Daha önce gönderilmiş mi?
+        const durum = await gonderimDurum(trDate);
+        if (durum.sent) {
+            console.log(`⏭️ [DAILY] ${trDate} zaten gönderilmiş. İşlem atlandı.`);
+            return;
+        }
 
-        // 🔍 DWH'dan veri al - Liste ekranıyla aynı sorgu 
-        const result = await dwhPool.request()
+        // 2. DWH'den dünkü kayıt (tek)
+        dwhPool = new sql.ConnectionPool(dwhConfig);
+        await dwhPool.connect();
+        const dwhResult = await dwhPool.request()
+            .input('tarih', sql.VarChar, trDate)
             .query(`
-                SELECT TOP 50 * 
-                FROM [DWH].[dbo].[FactKisiSayisiCiro] 
-                WHERE [Şube Kodu] = 17672 
-                AND CONVERT(datetime, Tarih, 104) >= DATEADD(day, -7, GETDATE())
+                SELECT TOP 1 
+                    Tarih,
+                    CAST(Ciro AS DECIMAL(18,2)) AS Ciro,
+                    [Kişi Sayısı] AS Kisi
+                FROM [DWH].[dbo].[FactKisiSayisiCiro]
+                WHERE [Şube Kodu] = 17672
+                  AND Tarih = @tarih
                 ORDER BY CONVERT(datetime, Tarih, 104) DESC
             `);
 
-        console.log(`📊 DWH'dan toplam kayıt sayısı: ${result.recordset.length}`);
-        let processedCount = 0;
-        let sentCount = 0;
-        let alreadySentCount = 0;
-        let errorCount = 0;
+        if (dwhResult.recordset.length === 0) {
+            console.warn(`⚠️ [DAILY] DWH'de ${trDate} için veri bulunamadı. Gönderim yapılmadı.`);
+            return;
+        }
 
-        // 🔄 RESTO bağlantısını API gönderimler için ayrı aç
+        const row = dwhResult.recordset[0];
+        const ciro = parseFloat(row.Ciro).toFixed(2);
+        const kisi = parseInt(row.Kisi);
+
+        // 3. API payload
+        const payload = [{
+            SalesFromDATE: isoDate,
+            SalesToDATE: isoDate,
+            NetSalesAmount: parseFloat(ciro),
+            NoofTransactions: kisi,
+            SalesFrequency: 'Daily',
+            PropertyCode: 'ESM',
+            LeaseCode: 't0000967',
+            SaleType: 'food'
+        }];
+
+        console.log(`📤 [DAILY] Gönderiliyor → Tarih: ${isoDate}, Ciro: ${ciro}, Kişi: ${kisi}`);
+
+        // 4. API çağrısı (tek deneme; geliştirme: retry eklenebilir)
+        const response = await axios.post(API_URL, payload, { headers: API_HEADERS });
+        console.log(`✅ [DAILY] API Status: ${response.status}`);
+
+        // 5. Log kaydı
         restoPool = new sql.ConnectionPool(restoConfig);
         await restoPool.connect();
-        console.log('✅ RESTO veritabanı bağlantısı kuruldu');
-        for (const row of result.recordset) {
-            // 📊 Değişkenleri try bloğundan önce tanımla (catch bloğunda da erişilebilsin)
-            let ciro, kisi, tarih, formattedTarih;
+        await restoPool.request()
+            .input('tarih', sql.DateTime, new Date())
+            .input('ip', sql.VarChar, 'SCHEDULER')
+            .input('kullanici', sql.VarChar, 'SYSTEM: Daily Scheduler')
+            .input('tablo', sql.VarChar, 'ciro')
+            .input('veri', sql.Text, JSON.stringify(payload))
+            .input('veri1', sql.VarChar, ciro)
+            .input('veri2', sql.VarChar, kisi.toString())
+            .input('veri3', sql.VarChar, trDate)
+            .input('cevap', sql.Text, JSON.stringify(response.data))
+            .input('statuscode', sql.Int, response.status)
+            .query(`INSERT INTO basar.personelLog
+                (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode)
+                VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);
 
-            try {
-                ciro = parseFloat(row.Ciro).toFixed(2);
-                kisi = row["Kişi Sayısı"];
-                tarih = row.Tarih;
-
-                // Tarih formatını düzelt - Liste ekranıyla aynı
-                const tariharr = tarih.split('.');
-                formattedTarih = tariharr[1] + '.' + tariharr[0].padStart(2, '0') + '.' + tariharr[2];
-
-                // 🔍 UNIFIED APPROACH: gonderimDurum() fonksiyonunu kullan
-                const durumKontrol = await gonderimDurum(formattedTarih);
-
-                if (durumKontrol.sent) {
-                    console.log(`⏭️ Atlaniyor - Tarih: ${formattedTarih} (Zaten gönderilmiş)`);
-                    alreadySentCount++;
-                    processedCount++;
-                    continue;
-                }
-
-                // Gönderilmemiş - API'ye gönder
-                // Tarih formatını API için hazırla
-
-                const dateObj = new Date(tariharr[2], tariharr[1] - 1, tariharr[0]);
-                const formattedDate = dateObj.toISOString().split('T')[0];
-
-                try {
-                    const payload = [{
-                        "SalesFromDATE": formattedDate,
-                        "NetSalesAmount": parseFloat(ciro),
-                        "NoofTransactions": parseInt(kisi),
-                        "SalesToDATE": formattedDate,
-                        "SalesFrequency": "Daily",
-                        "PropertyCode": "ESM",
-                        "LeaseCode": "t0000967",
-                        "SaleType": "food"
-                    }];                    console.log(`📤 Gönderiliyor - Tarih: ${formattedDate}, Ciro: ${ciro}₺, Kişi: ${kisi}`);
-                    console.log(`📊 Payload: ${JSON.stringify(payload, null, 2)}`);
-
-                    const response = await axios.post(API_URL, payload, { headers: API_HEADERS });
-                    console.log(`📈 API Response - Status: ${response.status}, Data: ${JSON.stringify(response.data)}`);
-
-                    // 📝 personelLog'a kaydet (gonderimDurum() bunu kontrol eder)
-                    await restoPool.request()
-                        .input('tarih', sql.DateTime, new Date())
-                        .input('ip', sql.VarChar, 'SCHEDULER')
-                        .input('kullanici', sql.VarChar, 'SYSTEM: Otomatik Scheduler')
-                        .input('tablo', sql.VarChar, 'ciro')
-                        .input('veri', sql.Text, JSON.stringify(payload))
-                        .input('veri1', sql.VarChar, ciro)
-                        .input('veri2', sql.VarChar, kisi)
-                        .input('veri3', sql.VarChar, formattedTarih)
-                        .input('cevap', sql.Text, JSON.stringify(response.data))
-                        .input('statuscode', sql.Int, response.status)
-                        .query(`INSERT INTO basar.personelLog 
-                    (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode) 
-                    VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);                    await sendEmail(ciro, kisi, formattedTarih, 'SYSTEM: Otomatik Scheduler');
-
-                    await sendEmail(ciro, kisi, formattedTarih, 'SYSTEM: Otomatik Scheduler');
-
-                    console.log(`✅ [BAŞARILI] Veri gönderildi! API Status: ${response.status}, Tarih: ${formattedTarih}`);
-                    sentCount++;
-                    processedCount++;
-                } catch (err) {
-                    console.error(`❌ [HATA] Scheduler gönderim başarısız! Tarih: ${formattedTarih}, Hata: ${err.message}`);
-
-                    if (!restoPool) {
-                        restoPool = new sql.ConnectionPool(restoConfig);
-                        await restoPool.connect();
-                    }
-
-                    await restoPool.request()
-                        .input('tarih', sql.DateTime, new Date())
-                        .input('ip', sql.VarChar, 'SCHEDULER')
-                        .input('kullanici', sql.VarChar, 'SYSTEM: Otomatik Scheduler')
-                        .input('tablo', sql.VarChar, 'ciro_error')
-                        .input('veri', sql.Text, JSON.stringify({ ciro, kisi, tarih: formattedTarih }))
-                        .input('veri1', sql.VarChar, ciro)
-                        .input('veri2', sql.VarChar, kisi)
-                        .input('veri3', sql.VarChar, formattedTarih)                        .input('cevap', sql.Text, err.message)
-                        .input('statuscode', sql.Int, 500)
-                        .query(`INSERT INTO basar.personelLog 
-                    (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode) 
-                    VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);
-
-                    errorCount++;
-                    processedCount++;
-                }
-            } catch (rowError) {
-                // Detaylı hata analizi
-                let errorDetails = {
-                    message: rowError.message,
-                    stack: rowError.stack
-                };
-
-                // Eğer axios hatası ise, response detaylarını da ekle
-                if (rowError.response) {
-                    errorDetails.apiStatus = rowError.response.status;
-                    errorDetails.apiStatusText = rowError.response.statusText;
-                    errorDetails.apiData = rowError.response.data;
-                    errorDetails.apiHeaders = rowError.response.headers;
-                }
-
-                console.error(`❌ DETAYLI HATA ANALİZİ - Tarih: ${formattedTarih || 'TANIMSIZ'}`);
-                console.error(`🔍 Hata Tipi: ${rowError.name || 'Bilinmeyen'}`);
-                console.error(`📄 Hata Mesajı: ${rowError.message}`);
-                if (rowError.response) {
-                    console.error(`🌐 API Status: ${rowError.response.status} - ${rowError.response.statusText}`);
-                    console.error(`📋 API Response Data: ${JSON.stringify(rowError.response.data, null, 2)}`);
-                }
-
-                // Hata durumunda da personelLog'a kaydet
-                try {
-                    await restoPool.request()
-                        .input('tarih', sql.DateTime, new Date())
-                        .input('ip', sql.VarChar, 'SCHEDULER')
-                        .input('kullanici', sql.VarChar, 'SYSTEM: Otomatik Scheduler')
-                        .input('tablo', sql.VarChar, 'ciro_error')
-                        .input('veri', sql.Text, JSON.stringify({
-                            tarih: formattedTarih || 'TANIMSIZ',
-                            ciro: ciro || 'TANIMSIZ',
-                            kisi: kisi || 'TANIMSIZ',
-                            error: rowError.message,
-                            errorDetails: errorDetails
-                        }))
-                        .input('veri1', sql.VarChar, (ciro || 'TANIMSIZ').toString())
-                        .input('veri2', sql.VarChar, (kisi || 'TANIMSIZ').toString())
-                        .input('veri3', sql.VarChar, formattedTarih || 'TANIMSIZ')
-                        .input('cevap', sql.Text, JSON.stringify(errorDetails))
-                        .input('statuscode', sql.Int, rowError.response?.status || 500)
-                        .query(`
-                            INSERT INTO basar.personelLog
-                            (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode)
-                            VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)
-                        `);
-                    console.log(`📝 Hata detayları personelLog'a kaydedildi`);
-                } catch (logError) {
-                    console.error(`❌ Log kaydetme hatası: ${logError.message}`);
-                }
-
-                errorCount++;
-                processedCount++;
-            }
-        } console.log(`🎉 Otomatik görev tamamlandı!`);
-        console.log(`📊 Özet: Toplam ${result.recordset.length} kayıt, ${processedCount} işlendi, ${sentCount} başarılı, ${alreadySentCount} zaten gönderilmiş, ${errorCount} hata`);
-
-        // Bağlantıları kapat
-        await dwhPool.close();
-        console.log('🔒 DWH bağlantısı kapatıldı');
+        // 6. Email (tek sefer – önceki çift çağrı bug düzeltildi)
+        await sendEmail(ciro, kisi, trDate, 'SYSTEM: Daily Scheduler');
+        console.log(`🎉 [DAILY] Görev tamamlandı - ${trDate}`);
 
     } catch (err) {
-        console.error('❌ Otomatik görev hatası:', err.message);
-    } finally {
-        if (restoPool) {
-            await restoPool.close();
-            console.log('🔒 RESTO bağlantısı kapatıldı');
+        console.error(`❌ [DAILY] Hata: ${err.message}`);
+        try {
+            await sendErrorEmail({
+                kullanici: 'SYSTEM: Daily Scheduler',
+                source: 'DAILY_SCHEDULER',
+                errorMessage: err.message,
+                errorStack: err.stack || ''
+            });
+        } catch (mailErr) {
+            console.error('Hata emaili gönderilemedi (DAILY_SCHEDULER):', mailErr.message);
         }
+        try {
+            if (!restoPool) {
+                restoPool = new sql.ConnectionPool(restoConfig);
+                await restoPool.connect();
+            }
+            await restoPool.request()
+                .input('tarih', sql.DateTime, new Date())
+                .input('ip', sql.VarChar, 'SCHEDULER')
+                .input('kullanici', sql.VarChar, 'SYSTEM: Daily Scheduler')
+                .input('tablo', sql.VarChar, 'ciro_error')
+                .input('veri', sql.Text, JSON.stringify({ error: err.message }))
+                .input('veri1', sql.VarChar, '')
+                .input('veri2', sql.VarChar, '')
+                .input('veri3', sql.VarChar, '')
+                .input('cevap', sql.Text, err.stack || '')
+                .input('statuscode', sql.Int, 500)
+                .query(`INSERT INTO basar.personelLog
+                    (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode)
+                    VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);
+        } catch (logErr) {
+            console.error('❌ [DAILY] Hata log kaydedilemedi:', logErr.message);
+        }
+    } finally {
+        if (dwhPool) { try { await dwhPool.close(); } catch(_){} }
+        if (restoPool) { try { await restoPool.close(); } catch(_){} }
     }
 });
 
@@ -2124,6 +2133,13 @@ schedule.scheduleJob('0 18 2 * *', async () => {
         
         // 2. Aylık veriyi hesapla
         console.log(`🔢 [SCHEDULER] ${ay}/${yil} dönemi için veri hesaplanıyor...`);
+        // Önce eksik günleri otomatik tamamlamaya çalış
+        try {
+            const eksikSonuc = await monthlyOperations.tamamlaEksikGunler(yil, ay);
+            console.log('🔄 Eksik gün tamamlama özeti (scheduler):', eksikSonuc);
+        } catch (e) {
+            console.warn('⚠️ Eksik gün tamamlama hata verdi (scheduler) devam ediliyor:', e.message);
+        }
         const aylikVeri = await monthlyOperations.aylikVeriHesapla(yil, ay);
         
         console.log(`📊 [SCHEDULER] Hesaplanan veriler:`);
@@ -2139,7 +2155,8 @@ schedule.scheduleJob('0 18 2 * *', async () => {
             aylikVeri.toplamCiro, 
             aylikVeri.toplamKisi, 
             'SCHEDULER', 
-            'SYSTEM: Otomatik Aylık Scheduler'
+            'SYSTEM: Otomatik Aylık Scheduler',
+            aylikVeri.gunSayisi
         );
         
         console.log(`✅ [SCHEDULER] Aylık rapor başarıyla gönderildi!`);
@@ -2184,6 +2201,12 @@ app.post('/monthly-send', async (req, res) => {
         }
 
         // 2. Veri hesapla
+        try {
+            const eksikSonuc = await monthlyOperations.tamamlaEksikGunler(parseInt(yil), parseInt(ay));
+            console.log('🔄 Eksik gün tamamlama özeti (manuel):', eksikSonuc);
+        } catch (e) {
+            console.warn('⚠️ Eksik gün tamamlama hata verdi (manuel) devam ediliyor:', e.message);
+        }
         const aylikVeri = await monthlyOperations.aylikVeriHesapla(parseInt(yil), parseInt(ay));
 
         // 3. API'ye gönder
@@ -2193,7 +2216,8 @@ app.post('/monthly-send', async (req, res) => {
             aylikVeri.toplamCiro,
             aylikVeri.toplamKisi,
             'MANUAL',
-            kullaniciAdi
+            kullaniciAdi,
+            aylikVeri.gunSayisi
         );
 
         res.json({
@@ -2579,6 +2603,19 @@ app.post('/submit_data', requireLogin, async (req, res) => {
         }
 
         console.error('Submit data error:', error);
+        try {
+            await sendErrorEmail({
+                ciro,
+                kisi: kisi_sayisi,
+                tarih,
+                kullanici: username,
+                source: 'SUBMIT_DATA',
+                errorMessage: error.message,
+                errorStack: error.stack || ''
+            });
+        } catch (mailErr) {
+            console.error('Hata emaili gönderilemedi (SUBMIT_DATA):', mailErr.message);
+        }
         res.status(500).json({
             error: 'Veri kaydedilirken hata oluştu',
             detail: error.message,
