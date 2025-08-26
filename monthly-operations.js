@@ -37,48 +37,35 @@ function setErrorNotifier(fn) {
     }
 }
 
-// Dahili aylık hata emaili (externalErrorNotifier yoksa kullanılır)
+// Aylık hata bildirimi - artık merkezi alerting modülünü kullanır
+function stageSeverity(stage) {
+    const s = (stage || '').toUpperCase();
+    if (s.includes('API') || s.includes('GONDER')) return 'CRITICAL';
+    if (s.includes('EKS') || s.includes('MISSING')) return 'WARN';
+    if (s.includes('VERI')) return 'ERROR';
+    return 'ERROR';
+}
+
 async function sendMonthlyErrorEmail({ stage = 'UNKNOWN', yil = null, ay = null, errorMessage = 'Bilinmeyen hata', errorStack = '', context = {} }) {
-    if (externalErrorNotifier) {
-        // Ortak mekanizma kullan
-        return externalErrorNotifier({
-            kullanici: 'SYSTEM: Monthly Ops',
-            source: `MONTHLY_${stage}`,
-            errorMessage,
-            errorStack
-        });
-    }
+    const period = (yil && ay) ? `${ay}/${yil}` : 'Bilinmiyor';
+    const payload = {
+        kullanici: 'SYSTEM: Monthly Ops',
+        source: `MONTHLY_${stage}`,
+        errorMessage: `[${period}] ${errorMessage}`,
+        errorStack,
+        severity: stageSeverity(stage),
+        context: { period, stage, ...context }
+    };
     try {
-        const t = nodemailer.createTransport({
-            host: 'smtp.office365.com',
-            port: 25,
-            secure: false,
-            auth: { user: 'alert@apazgroup.com', pass: 'dxvybfdrbtfpfbfl' }
-        });
-        const period = (yil && ay) ? `${ay}/${yil}` : 'Bilinmiyor';
-        const html = `
-        <div style="font-family:Segoe UI,Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;border:1px solid #eee;border-radius:8px;overflow:hidden">
-            <div style="background:#6f42c1;color:#fff;padding:16px 22px">
-                <h2 style="margin:0;font-size:18px">� Aylık İşlem Hatası</h2>
-            </div>
-            <div style="padding:20px;font-size:13px;color:#333;line-height:1.5">
-                <p><strong>Aşama:</strong> ${stage}</p>
-                <p><strong>Dönem:</strong> ${period}</p>
-                <p><strong>Hata:</strong><br><code style="background:#f8f9fa;padding:6px 8px;border-radius:4px;display:inline-block;white-space:pre-wrap;max-width:100%">${errorMessage}</code></p>
-                ${Object.keys(context).length ? `<pre style='background:#272822;color:#f8f8f2;padding:12px;border-radius:6px;overflow:auto;max-height:260px'>${JSON.stringify(context,null,2).replace(/</g,'&lt;')}</pre>` : ''}
-                ${errorStack ? `<details style='margin-top:10px'><summary style='cursor:pointer'>Stack Trace</summary><pre style='background:#272822;color:#f8f8f2;padding:12px;border-radius:6px;overflow:auto;max-height:320px'>${errorStack.replace(/</g,'&lt;')}</pre></details>` : ''}
-                <p style="margin-top:16px;font-size:11px;color:#666">Bu e-posta aylık görev hata bildirimi için otomatik oluşturuldu.</p>
-            </div>
-        </div>`;
-        await t.sendMail({
-            from: 'alert@apazgroup.com',
-            to: 'atakan.kaplayan@apazgroup.com',
-            subject: `🚨 Aylık İşlem Hatası - ${period} - ${stage}`,
-            html
-        });
-        console.log('📧❗ Aylık hata emaili gönderildi');
-    } catch (mailErr) {
-        console.error('📧❌ Aylık hata emaili gönderilemedi:', mailErr.message);
+        if (externalErrorNotifier) {
+            return await externalErrorNotifier(payload);
+        } else {
+            // Doğrudan merkezi modülü çağır (döngüden kaçınmak için require burada yapılır)
+            const { sendErrorEmail } = require('./alerting');
+            return await sendErrorEmail(payload);
+        }
+    } catch (err) {
+        console.error('📧❌ Aylık hata emaili gönderilemedi (merkezi):', err.message);
     }
 }
 
@@ -601,8 +588,8 @@ async function tamamlaEksikGunler(yil, ay) {
             const payload = [{
                 SalesFromDATE: isoDate,
                 SalesToDATE: isoDate,
-                NetSalesAmount: parseFloat(ciro),
-                NoofTransactions: kisi,
+                NetSalesAmount: ciro,               // unified string format (2 decimals)
+                NoofTransactions: kisi.toString(),  // unified string format
                 SalesFrequency: 'Daily',
                 PropertyCode: 'ESM',
                 LeaseCode: 't0000967',

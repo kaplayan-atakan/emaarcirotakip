@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<title>📊 Aylık Ciro Raporu - Örnek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background:#f2f4f7; margin:0; padding:30px; color:#333; }
+  .email-wrapper { max-width:760px; margin:0 auto; background:#ffffff; border:1px solid #e5e9f2; border-radius:14px; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,0.06);}  
+  .header { background:linear-gradient(135deg,#667eea,#764ba2); padding:28px 36px; color:#fff; }
+  .header h1 { margin:0; font-size:24px; letter-spacing:.5px; }
+  .header p { margin:6px 0 0; opacity:.9; }
+  .content { padding:34px 36px 42px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:18px; margin-bottom:26px; }
+  .metric { background:#fff; border:1px solid #e2e6ef; padding:18px 16px 16px; border-radius:10px; position:relative; box-shadow:0 2px 6px rgba(0,0,0,0.04);}  
+  .metric h3 { margin:0 0 8px; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:#5a6578; }
+  .metric .value { font-size:22px; font-weight:600; color:#2c3e50; display:flex; align-items:baseline; gap:6px; }
+  .metric .sub { font-size:11px; color:#8691a2; margin-top:6px; }
+  .badge { display:inline-block; padding:3px 7px; font-size:11px; border-radius:30px; background:#eef2ff; color:#3f51b5; font-weight:600; letter-spacing:.4px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  thead th { background:#f5f7fa; text-align:left; padding:10px 8px; border:1px solid #e1e6ed; font-weight:600; color:#4a5668; font-size:12px; }
+  tbody td { padding:9px 8px; border:1px solid #e7ecf2; vertical-align:top; }
+  tbody tr:nth-child(even) { background:#fbfcfd; }
+  tfoot td { padding:11px 8px; background:#eef2f7; border:1px solid #d9e2ec; font-weight:600; }
+  .ciro { color:#1e8e3e; font-weight:500; text-align:right; font-variant-numeric:tabular-nums; }
+  .kisi { color:#1d5fbf; font-weight:500; text-align:right; font-variant-numeric:tabular-nums; }
+  .kaynak span { display:inline-block; padding:3px 6px; border-radius:5px; font-size:10px; font-weight:600; letter-spacing:.4px; }
+  .src-LOG { background:#28a745; color:#fff; }
+  .src-AUTO-FILL { background:#007bff; color:#fff; }
+  .src-MANUEL { background:#6f42c1; color:#fff; }
+  .src-DWH_ONLY { background:#6c757d; color:#fff; }
+  .warn-box { background:#fff8e1; border:1px solid #ffe8a3; padding:14px 16px; border-radius:8px; line-height:1.5; font-size:13px; margin:26px 0 10px; }
+  .success-box { background:#e6f6ed; border:1px solid #c6e9d1; padding:14px 16px; border-radius:8px; line-height:1.5; font-size:13px; margin:26px 0 10px; }
+  .anomaly { background:#fff4e6 !important; }
+  .anomaly .ciro { color:#d35400; font-weight:600; }
+  details { margin-top:18px; }
+  details summary { cursor:pointer; font-size:13px; font-weight:600; color:#444; }
+  code.inline { background:#f1f4f8; padding:2px 5px; border-radius:4px; font-size:11px; }
+  .footer { text-align:center; font-size:11px; color:#7d8897; padding:28px 10px 12px; }
+  .ratio-chip { background:#f0ecfe; color:#6b3fa0; padding:3px 8px; border-radius:16px; font-size:11px; font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="header">
+      <h1>📊 Aylık Ciro Raporu</h1>
+      <p>Temmuz 2025 Dönemi</p>
+    </div>
+    <div class="content">
+      <div class="grid">
+        <div class="metric">
+          <h3>Toplam Ciro</h3>
+          <div class="value">1.452.390,55<span style="font-size:14px; color:#5a6578;">₺</span></div>
+          <div class="sub">31 gün birikimli</div>
+        </div>
+        <div class="metric">
+          <h3>Toplam Kişi</h3>
+            <div class="value">68.214</div>
+          <div class="sub">İşlem sayısı</div>
+        </div>
+        <div class="metric">
+          <h3>Günlük Ort. Ciro</h3>
+          <div class="value">46.851,30<span style="font-size:14px; color:#5a6578;">₺</span></div>
+          <div class="sub">Toplam / 31</div>
+        </div>
+        <div class="metric">
+          <h3>Günlük Ort. Kişi</h3>
+          <div class="value">2.200</div>
+          <div class="sub">Toplam / 31</div>
+        </div>
+        <div class="metric">
+          <h3>Kişi Başı Ciro</h3>
+          <div class="value">21,30<span style="font-size:14px; color:#5a6578;">₺</span></div>
+          <div class="sub">Toplam Ciro / Toplam Kişi</div>
+        </div>
+        <div class="metric">
+          <h3>Tamamlama Oranı</h3>
+          <div class="value">100<span style="font-size:14px; color:#5a6578;">%</span></div>
+          <div class="sub">31 / 31 gün</div>
+        </div>
+      </div>
+
+      <div class="success-box">
+        ✅ <strong>Başarılı Gönderim:</strong> Temmuz 2025 dönemi aylık ciro verisi API'ye iletilmiştir. Her gün için günlük gönderim başarıyla alınmıştır.
+      </div>
+
+      <h2 style="font-size:17px; margin:34px 0 14px; color:#2c3e50;">📅 Günlük Detay Tablosu</h2>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:82px;">Tarih</th>
+              <th style="width:110px; text-align:right;">Ciro (₺)</th>
+              <th style="width:110px; text-align:right;">Kişi Sayısı</th>
+              <th style="width:80px; text-align:center;">Kaynak</th>
+              <th style="text-align:right;">Kişi Başı</th>
+              <th style="text-align:right;">Δ Önceki %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Örnek satırlar -->
+            <tr>
+              <td>01.07.2025</td>
+              <td class="ciro">48.120,40</td>
+              <td class="kisi">2.255</td>
+              <td class="kaynak"><span class="src-LOG">LOG</span></td>
+              <td class="kisi">21,35</td>
+              <td class="kisi" style="color:#16a34a;">—</td>
+            </tr>
+            <tr>
+              <td>02.07.2025</td>
+              <td class="ciro">47.980,10</td>
+              <td class="kisi">2.180</td>
+              <td class="kaynak"><span class="src-LOG">LOG</span></td>
+              <td class="kisi">22,00</td>
+              <td class="kisi" style="color:#dc2626;">-3.3%</td>
+            </tr>
+            <tr class="anomaly" title="Anomali: Ortalama cirodan yüksek sapma">
+              <td>03.07.2025</td>
+              <td class="ciro">72.560,00</td>
+              <td class="kisi">2.995</td>
+              <td class="kaynak"><span class="src-MANUEL">MANUEL</span></td>
+              <td class="kisi">24,22</td>
+              <td class="kisi" style="color:#16a34a;">+51.2%</td>
+            </tr>
+            <tr>
+              <td>04.07.2025</td>
+              <td class="ciro">46.210,80</td>
+              <td class="kisi">2.090</td>
+              <td class="kaynak"><span class="src-LOG">LOG</span></td>
+              <td class="kisi">22,11</td>
+              <td class="kisi" style="color:#dc2626;">-36.3%</td>
+            </tr>
+            <tr>
+              <td>05.07.2025</td>
+              <td class="ciro">45.330,50</td>
+              <td class="kisi">2.030</td>
+              <td class="kaynak"><span class="src-AUTO-FILL">AUTO-FILL</span></td>
+              <td class="kisi">22,34</td>
+              <td class="kisi" style="color:#dc2626;">-1.9%</td>
+            </tr>
+            <!-- ... daha fazla satır ... -->
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>TOPLAM</td>
+              <td class="ciro">1.452.390,55</td>
+              <td class="kisi">68.214</td>
+              <td style="text-align:center;">31 gün</td>
+              <td class="kisi">21,30</td>
+              <td class="kisi">—</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <details>
+        <summary>Eksik Gün / Auto-Fill Durumu</summary>
+        <div style="margin-top:10px; font-size:12.5px; line-height:1.55;">
+          Eksik gün bulunmamaktadır. 1 gün AUTO-FILL (05.07.2025) ile doldurulmuştur.
+        </div>
+      </details>
+
+      <details>
+        <summary>Teknik Özet</summary>
+        <div style="margin-top:10px; font-size:12.5px; line-height:1.55;">
+          <strong>API Endpoint:</strong> Monthly Sales API<br/>
+          <strong>İşlem Zamanı:</strong> 02.08.2025 18:02:11<br/>
+          <strong>İşlemi Yapan:</strong> SYSTEM (Scheduler)<br/>
+          <strong>Sürüm:</strong> v2.5.1
+        </div>
+      </details>
+    </div>
+    <div class="footer">
+      Bu e-posta otomatik oluşturulmuştur – Apaz Group © 2025
+    </div>
+  </div>
+</body>
+</html>

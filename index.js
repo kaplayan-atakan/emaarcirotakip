@@ -5,6 +5,7 @@ const sql = require('mssql');
 const path = require('path');
 const session = require('express-session');
 const nodemailer = require('nodemailer');
+const { sendErrorEmail: centralSendErrorEmail } = require('./alerting');
 const ActiveDirectory = require('activedirectory2');
 
 // 📊 Aylık işlemler modülü
@@ -317,6 +318,9 @@ const API_HEADERS = {
 
 // 📊 Monthly modülüne konfigürasyonları aktar
 monthlyOperations.setConfig(dwhConfig, restoConfig, API_URL, API_HEADERS);
+// Merkezi hata bildirimi fonksiyonunu aylık modüle enjekte et
+// (Hoisted function declaration olduğundan aşağıdaki wrapper'ı kullanabilir)
+monthlyOperations.setErrorNotifier(sendErrorEmail);
 
 // Authentication functions
 async function authenticateAD(username, password) {
@@ -553,44 +557,8 @@ async function sendEmail(ciro, kisi, tarih, kullanici) {
     }
 }
 
-// ❗ Emaar API hata durumlarında uyarı emaili
-async function sendErrorEmail({ ciro = null, kisi = null, tarih = null, kullanici = 'SYSTEM', source = 'UNKNOWN', errorMessage = 'Bilinmeyen hata', errorStack = '' }) {
-        try {
-                const transporter = nodemailer.createTransport({
-                        host: 'smtp.office365.com',
-                        port: 25,
-                        secure: false,
-                        auth: { user: 'alert@apazgroup.com', pass: 'dxvybfdrbtfpfbfl' }
-                });
-
-                const html = `
-                <div style="font-family:Segoe UI,Arial,sans-serif;max-width:640px;margin:0 auto;background:#fff;border:1px solid #eee;border-radius:8px;overflow:hidden">
-                    <div style="background:#dc3545;color:#fff;padding:16px 22px">
-                        <h2 style="margin:0;font-size:18px">🚨 Emaar API Gönderim Hatası</h2>
-                    </div>
-                    <div style="padding:22px;color:#333;line-height:1.5;font-size:14px">
-                        <p><strong>Kaynak:</strong> ${source}</p>
-                        ${tarih ? `<p><strong>Tarih:</strong> ${tarih}</p>` : ''}
-                        ${ciro !== null ? `<p><strong>Ciro:</strong> ${ciro}</p>` : ''}
-                        ${kisi !== null ? `<p><strong>Kişi:</strong> ${kisi}</p>` : ''}
-                        <p><strong>Kullanıcı / Process:</strong> ${kullanici}</p>
-                        <p style="margin-top:14px"><strong>Hata Mesajı:</strong><br><code style="background:#f8f9fa;padding:6px 8px;border-radius:4px;display:inline-block;white-space:pre-wrap;max-width:100%">${errorMessage}</code></p>
-                        ${errorStack ? `<details style=\"margin-top:10px\"><summary style=\"cursor:pointer;color:#555\">Stack Trace</summary><pre style=\"background:#272822;color:#f8f8f2;padding:12px;border-radius:6px;overflow:auto;font-size:12px;max-height:300px\">${errorStack.replace(/</g,'&lt;')}</pre></details>` : ''}
-                        <p style="margin-top:18px;font-size:11px;color:#666">Bu e-posta otomatik oluşturulmuştur.</p>
-                    </div>
-                </div>`;
-
-                await transporter.sendMail({
-                        from: 'alert@apazgroup.com',
-                        to: 'atakan.kaplayan@apazgroup.com',
-                        subject: `🚨 EMAAR API Hatası - ${tarih || 'Tarih Yok'} - ${source}`,
-                        html
-                });
-                console.log('📧❗ Hata emaili gönderildi');
-        } catch (e) {
-                console.error('📧❌ Hata emaili gönderilemedi:', e.message);
-        }
-}
+// ❗ Merkezileştirilmiş hata email wrapper (geriye uyumluluk için aynı isim)
+async function sendErrorEmail(args) { return centralSendErrorEmail(args); }
 
 // Routes
 
@@ -1881,15 +1849,18 @@ app.post('/send', requireLogin, async (req, res) => {
     console.log(`📊 [GÖNDER] Kullanıcı: ${fullUserInfo}, Tarih: ${tarih}, Ciro: ${ciro}₺, Kişi: ${kisi}`);
 
     try {
+        // Normalize numeric formats (string with dot decimal, consistent with monthly)
+        const netCiro = (parseFloat(ciro) || 0).toFixed(2); // ensures 2 decimals
+        const txCount = (parseInt(kisi, 10) || 0).toString();
         const payload = [{
-            "SalesToDATE": tarih,
-            "SalesFromDATE": tarih,
-            "NetSalesAmount": ciro,
-            "NoofTransactions": kisi,
-            "SalesFrequency": "Daily",
-            "PropertyCode": "ESM",
-            "LeaseCode": "t0000967",
-            "SaleType": "food"
+            SalesToDATE: tarih,
+            SalesFromDATE: tarih,
+            NetSalesAmount: netCiro,       // string form
+            NoofTransactions: txCount,     // string form
+            SalesFrequency: 'Daily',
+            PropertyCode: 'ESM',
+            LeaseCode: 't0000967',
+            SaleType: 'food'
         }];
 
         const response = await axios.post(API_URL, payload, { headers: API_HEADERS });
@@ -1948,7 +1919,9 @@ app.post('/send', requireLogin, async (req, res) => {
                 kullanici: fullUserInfo,
                 source: 'MANUAL_SEND',
                 errorMessage: err.message,
-                errorStack: err.stack || ''
+                errorStack: err.stack || '',
+                severity: 'ERROR',
+                context: { route: '/send', payload: { ciro, kisi, tarih } }
             });
         } catch (mailErr) {
             console.error('Hata emaili gönderilemedi (MANUAL_SEND):', mailErr.message);
@@ -2005,16 +1978,16 @@ schedule.scheduleJob('0 17 * * *', async () => {
             return;
         }
 
-        const row = dwhResult.recordset[0];
-        const ciro = parseFloat(row.Ciro).toFixed(2);
-        const kisi = parseInt(row.Kisi);
+    const row = dwhResult.recordset[0];
+    const ciro = parseFloat(row.Ciro).toFixed(2); // keep as string with 2 decimals
+    const kisi = parseInt(row.Kisi);
 
         // 3. API payload
         const payload = [{
             SalesFromDATE: isoDate,
             SalesToDATE: isoDate,
-            NetSalesAmount: parseFloat(ciro),
-            NoofTransactions: kisi,
+            NetSalesAmount: ciro,                // unified string format
+            NoofTransactions: kisi.toString(),   // unified string format
             SalesFrequency: 'Daily',
             PropertyCode: 'ESM',
             LeaseCode: 't0000967',
@@ -2056,7 +2029,9 @@ schedule.scheduleJob('0 17 * * *', async () => {
                 kullanici: 'SYSTEM: Daily Scheduler',
                 source: 'DAILY_SCHEDULER',
                 errorMessage: err.message,
-                errorStack: err.stack || ''
+                errorStack: err.stack || '',
+                severity: 'ERROR',
+                context: { phase: 'SCHEDULE_DAILY', targetDate: trDate }
             });
         } catch (mailErr) {
             console.error('Hata emaili gönderilemedi (DAILY_SCHEDULER):', mailErr.message);
@@ -2134,13 +2109,32 @@ schedule.scheduleJob('0 18 2 * *', async () => {
         // 2. Aylık veriyi hesapla
         console.log(`🔢 [SCHEDULER] ${ay}/${yil} dönemi için veri hesaplanıyor...`);
         // Önce eksik günleri otomatik tamamlamaya çalış
+        let eksikSonuc;
         try {
-            const eksikSonuc = await monthlyOperations.tamamlaEksikGunler(yil, ay);
+            eksikSonuc = await monthlyOperations.tamamlaEksikGunler(yil, ay);
             console.log('🔄 Eksik gün tamamlama özeti (scheduler):', eksikSonuc);
         } catch (e) {
             console.warn('⚠️ Eksik gün tamamlama hata verdi (scheduler) devam ediliyor:', e.message);
         }
         const aylikVeri = await monthlyOperations.aylikVeriHesapla(yil, ay);
+
+        // Abort conditions: still missing days OR auto-fill failures
+        const missingCount = (aylikVeri.eksikGunler || []).length;
+        const failedCount = eksikSonuc?.failedDays?.length || 0;
+        const notFoundCount = eksikSonuc?.notFoundDays?.length || 0;
+        if (missingCount > 0 || failedCount > 0 || notFoundCount > 0) {
+            console.error('🛑 [SCHEDULER] Aylık gönderim ABORT - eksik veya başarısız günler var', { missingCount, failedCount, notFoundCount });
+            try {
+                await sendErrorEmail({
+                    kullanici: 'SYSTEM: Monthly Scheduler',
+                    source: 'MONTHLY_ABORT',
+                    severity: 'CRITICAL',
+                    errorMessage: `Aylık gönderim iptal edildi. Missing=${missingCount}, Failed=${failedCount}, NotFound=${notFoundCount}`,
+                    context: { yil, ay, eksikGunler: aylikVeri.eksikGunler, autoFill: eksikSonuc }
+                });
+            } catch(_) {}
+            return; // do not proceed to API send
+        }
         
         console.log(`📊 [SCHEDULER] Hesaplanan veriler:`);
         console.log(`   💰 Toplam Ciro: ${aylikVeri.toplamCiro.toLocaleString('tr-TR')}₺`);
@@ -2202,13 +2196,34 @@ app.post('/monthly-send', async (req, res) => {
         }
 
         // 2. Veri hesapla
+        let eksikSonuc;
         try {
-            const eksikSonuc = await monthlyOperations.tamamlaEksikGunler(parseInt(yil), parseInt(ay));
+            eksikSonuc = await monthlyOperations.tamamlaEksikGunler(parseInt(yil), parseInt(ay));
             console.log('🔄 Eksik gün tamamlama özeti (manuel):', eksikSonuc);
         } catch (e) {
             console.warn('⚠️ Eksik gün tamamlama hata verdi (manuel) devam ediliyor:', e.message);
         }
         const aylikVeri = await monthlyOperations.aylikVeriHesapla(parseInt(yil), parseInt(ay));
+
+        const missingCount = (aylikVeri.eksikGunler || []).length;
+        const failedCount = eksikSonuc?.failedDays?.length || 0;
+        const notFoundCount = eksikSonuc?.notFoundDays?.length || 0;
+        if (missingCount > 0 || failedCount > 0 || notFoundCount > 0) {
+            await sendErrorEmail({
+                kullanici: kullaniciAdi,
+                source: 'MONTHLY_ABORT_MANUAL',
+                severity: 'CRITICAL',
+                errorMessage: `Aylık gönderim iptal edildi. Missing=${missingCount}, Failed=${failedCount}, NotFound=${notFoundCount}`,
+                context: { yil, ay, eksikGunler: aylikVeri.eksikGunler, autoFill: eksikSonuc }
+            });
+            return res.status(409).json({
+                success: false,
+                message: 'Aylık gönderim iptal edildi: eksik veya başarısız günler mevcut',
+                stats: { missingCount, failedCount, notFoundCount },
+                eksikGunler: aylikVeri.eksikGunler,
+                autoFill: eksikSonuc
+            });
+        }
 
         // 3. API'ye gönder
         const gonderimSonucu = await monthlyOperations.monthlyApiGonder(
@@ -2613,7 +2628,9 @@ app.post('/submit_data', requireLogin, async (req, res) => {
                 kullanici: username,
                 source: 'SUBMIT_DATA',
                 errorMessage: error.message,
-                errorStack: error.stack || ''
+                errorStack: error.stack || '',
+                severity: 'ERROR',
+                context: { route: '/submit_data', record_id: recordId }
             });
         } catch (mailErr) {
             console.error('Hata emaili gönderilemedi (SUBMIT_DATA):', mailErr.message);
