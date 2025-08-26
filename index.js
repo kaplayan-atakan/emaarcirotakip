@@ -1112,9 +1112,11 @@ app.get('/', async (req, res) => {
                         </div>
                         
                         <!-- Tab Navigation -->
+                        <!-- Early global stub to avoid ReferenceError if buttons clicked before main script execution -->
+                        <script>window.showTab = window.showTab || function(tabName){try{var d=document.getElementById('daily-tab');var m=document.getElementById('monthly-tab');if(d)d.style.display='none';if(m)m.style.display='none';document.querySelectorAll('.tab-btn').forEach(function(btn){btn.style.borderBottomColor='transparent';btn.style.color='#6c757d';});var t=document.getElementById(tabName+'-tab');if(t)t.style.display='block';}catch(e){console.error('early showTab stub error',e);}};</script>
                         <div class="tab-navigation" style="margin-bottom: 20px; border-bottom: 2px solid #dee2e6;">
-                            <button class="tab-btn active" onclick="showTab('daily')" style="padding: 12px 24px; background: none; border: none; border-bottom: 3px solid #007bff; color: #007bff; font-weight: 600; cursor: pointer; margin-right: 10px;">📅 Günlük Gönderim</button>
-                            <button class="tab-btn" onclick="showTab('monthly')" style="padding: 12px 24px; background: none; border: none; border-bottom: 3px solid transparent; color: #6c757d; font-weight: 600; cursor: pointer;">📊 Aylık Rapor</button>
+                            <button class="tab-btn active" onclick="window.showTab ? showTab('daily', event) : null" style="padding: 12px 24px; background: none; border: none; border-bottom: 3px solid #007bff; color: #007bff; font-weight: 600; cursor: pointer; margin-right: 10px;">📅 Günlük Gönderim</button>
+                            <button class="tab-btn" onclick="window.showTab ? showTab('monthly', event) : null" style="padding: 12px 24px; background: none; border: none; border-bottom: 3px solid transparent; color: #6c757d; font-weight: 600; cursor: pointer;">📊 Aylık Rapor</button>
                         </div>
                         
                         <!-- Daily Tab Content -->
@@ -1186,7 +1188,20 @@ app.get('/', async (req, res) => {
                                         <div style="font-size:13px; color:#6c5500; line-height:1.4;">
                                             <strong>Test Aracı:</strong> Geçmiş ay için LOG bazlı günlük gönderilmiş verileri ve oluşturulacak aylık özet hesaplamasını tek ekranda inceleyebilirsiniz.
                                         </div>
-                                        <button onclick="runLastMonthDeepPreview()" style="padding:10px 18px; background:linear-gradient(135deg,#ff9800,#ffb74d); color:#222; font-weight:600; border:none; border-radius:8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.15);">🧪 Geçmiş Ay Derin Önizleme</button>
+                                        <script>
+                                            // Early safe stub for deep preview (overwritten later by full implementation)
+                                            if(!window.runLastMonthDeepPreview){
+                                                window.runLastMonthDeepPreview = function(btn){
+                                                    console.warn('Deep preview henüz hazır değil, 300ms sonra tekrar denenecek');
+                                                    setTimeout(function(){
+                                                        if(window.runLastMonthDeepPreview && window.runLastMonthDeepPreview !== arguments.callee){
+                                                            window.runLastMonthDeepPreview(btn);
+                                                        }
+                                                    },300);
+                                                }
+                                            }
+                                        </script>
+                                        <button onclick="window.runLastMonthDeepPreview && runLastMonthDeepPreview(this)" style="padding:10px 18px; background:linear-gradient(135deg,#ff9800,#ffb74d); color:#222; font-weight:600; border:none; border-radius:8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.15);">🧪 Geçmiş Ay Derin Önizleme</button>
                                     </div>
                                     <div id="deepPreviewResult" style="margin-top:16px; display:none; background:#f8f9fa; border:1px solid #eceff3; border-radius:8px; padding:16px; max-height:480px; overflow:auto; font-size:12.5px; line-height:1.45;"></div>
                                 </div>` : '' }
@@ -1418,8 +1433,8 @@ app.get('/', async (req, res) => {
                         }
 
                         // Deep preview (geçmiş ay günlük + aylık özet) sadece yetkili kullanıcı
-                        async function runLastMonthDeepPreview() {
-                            const btn = event.target;
+                        async function runLastMonthDeepPreview(btnEl) {
+                            const btn = btnEl || (typeof event !== 'undefined' ? event.target : null);
                             const container = document.getElementById('deepPreviewResult');
                             if (!container) return;
                             try {
@@ -1488,6 +1503,10 @@ app.get('/', async (req, res) => {
                             }
                         }
                         
+                        // Explicit global exposure for inline buttons
+                        window.runLastMonthDeepPreview = runLastMonthDeepPreview; // overwrite early stub
+                        window.triggerAutoFillLastMonth = triggerAutoFillLastMonth;
+
                         // Form gönderimlerinde loading spinner göster
                         document.addEventListener('DOMContentLoaded', function() {
                             const forms = document.querySelectorAll('form');
