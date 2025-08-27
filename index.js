@@ -891,8 +891,24 @@ app.get('/', async (req, res) => {
                         }
                     }
 
-                    const buttonClass = isGonderilmis ? 'btn-success' : 'btn-danger';
-                    const buttonText = isGonderilmis ? 'Yeniden Gönder' : 'Gönder';
+                    // Gelişmiş durum (son deneme / overall başarı)
+                    const detay = await gonderimDurumDetay(tarih);
+                    let statusBadge = '';
+                    if (detay.error) {
+                        statusBadge = `<span style=\"background:#dc354520;color:#dc3545;padding:2px 6px;border-radius:6px;font-size:11px;\">ERR</span>`;
+                    } else if (detay.neverSent) {
+                        statusBadge = `<span style=\"background:#6c757d20;color:#6c757d;padding:2px 6px;border-radius:6px;font-size:11px;\">YOK</span>`;
+                    } else if (detay.onlyFailures) {
+                        statusBadge = `<span style=\"background:#b91c1c20;color:#b91c1c;padding:2px 6px;border-radius:6px;font-size:11px;\">FAIL</span>`;
+                    } else if (detay.degraded) {
+                        statusBadge = `<span title=\"Önce başarı sonra hata (son: ${detay.lastStatusCode})\" style=\"background:#d9770620;color:#d97706;padding:2px 6px;border-radius:6px;font-size:11px;\">DEG</span>`;
+                    } else if (detay.lastIsSuccess) {
+                        statusBadge = `<span style=\"background:#19875420;color:#198754;padding:2px 6px;border-radius:6px;font-size:11px;\">OK</span>`;
+                    } else {
+                        statusBadge = `<span style=\"background:#6c757d20;color:#6c757d;padding:2px 6px;border-radius:6px;font-size:11px;\">?${detay.lastStatusCode||''}</span>`;
+                    }
+                    const buttonClass = detay.lastIsSuccess ? 'btn-success' : 'btn-danger';
+                    const buttonText = detay.lastIsSuccess ? 'Yeniden Gönder' : 'Gönder';
 
                     tableRows += `
                     <tr>
@@ -906,8 +922,9 @@ app.get('/', async (req, res) => {
                         <td>
                                 <input type="text" name="tarih" value="${tarih}" readonly style="width: 100px; padding: 5px; background: #f5f5f5;">
                         </td>
-                        <td>
-                                <button type="submit" class="${buttonClass}" style="padding: 8px 12px;">${buttonText}</button>
+            <td style="text-align:center;">${statusBadge}</td>
+            <td>
+                <button type="submit" class="${buttonClass}" style="padding: 8px 12px;">${buttonText}</button>
                                 
                             </form>
                         </td>
@@ -1128,6 +1145,7 @@ app.get('/', async (req, res) => {
                                             <th>Ciro (₺)</th>
                                             <th>Kişi Sayısı</th>
                                             <th>Tarih</th>
+                                            <th>Durum</th>
                                             <th>İşlem</th>
                                         </tr>
                                     </thead>
@@ -1135,6 +1153,10 @@ app.get('/', async (req, res) => {
                                         ${tableRows}
                                     </tbody>
                                 </table>
+                            </div>
+                            <div style="margin-top:22px;">
+                                <button onclick="toggleDailyLogDetails()" style="padding:10px 16px; background:#0d6efd; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:600; box-shadow:0 2px 6px rgba(0,0,0,0.15);">🔍 Detaylı Günlük Logları Göster</button>
+                                <div id="dailyLogDetails" style="display:none; margin-top:14px; background:#f8f9fa; border:1px solid #e3e7ed; border-radius:10px; padding:16px; max-height:420px; overflow:auto; font-size:12.5px; line-height:1.4;"></div>
                             </div>
                         </div>
                         
@@ -1189,17 +1211,62 @@ app.get('/', async (req, res) => {
                                             <strong>Test Aracı:</strong> Geçmiş ay için LOG bazlı günlük gönderilmiş verileri ve oluşturulacak aylık özet hesaplamasını tek ekranda inceleyebilirsiniz.
                                         </div>
                                         <script>
-                                            // Early safe stub for deep preview (overwritten later by full implementation)
-                                            if(!window.runLastMonthDeepPreview){
-                                                window.runLastMonthDeepPreview = function(btn){
-                                                    console.warn('Deep preview henüz hazır değil, 300ms sonra tekrar denenecek');
-                                                    setTimeout(function(){
-                                                        if(window.runLastMonthDeepPreview && window.runLastMonthDeepPreview !== arguments.callee){
-                                                            window.runLastMonthDeepPreview(btn);
-                                                        }
-                                                    },300);
+                                            // Early safe stub & resilient fallback for deep preview
+                                            (function(){
+                                                function defineFallback(){
+                                                    if(window.__deepPreviewFallbackDefined) return; // idempotent
+                                                    window.__deepPreviewFallbackFallbackTS = Date.now();
+                                                    window.runLastMonthDeepPreview = async function(btn){
+                                                        try {
+                                                            const container = document.getElementById('deepPreviewResult');
+                                                            if(!container){ return console.error('deepPreviewResult bulunamadı'); }
+                                                            container.style.display='block';
+                                                            container.innerHTML = '<em>Yükleniyor...</em>';
+                                                            if(btn){ btn.disabled = true; var orig = btn.innerHTML; btn.innerHTML='Çalışıyor...'; }
+                                                            const resp = await fetch('/monthly-last-month-deep-preview');
+                                                            const data = await resp.json();
+                                                            if(!data.success){ container.innerHTML = 'Hata: '+ data.message; return; }
+                                                            const v = data.veri || {}; const dwh = data.dwh || {}; const ayAd=['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+                                                            let html = '<div style="font-weight:600;font-size:14px;margin-bottom:8px;">📅 '+ ayAd[v.ay] +' '+ v.yil +' Derin Önizleme (Fallback)</div>';
+                                                            html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px;">';
+                                                            html += '<div style="background:#fff;padding:8px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Toplam Ciro</div><div style="font-weight:600;color:#1e8e3e;">'+ (v.toplamCiro||0).toLocaleString('tr-TR') +'₺</div></div>';
+                                                            html += '<div style="background:#fff;padding:8px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Toplam Kişi</div><div style="font-weight:600;color:#1d5fbf;">'+ (v.toplamKisi||0).toLocaleString('tr-TR') +'</div></div>';
+                                                            html += '<div style="background:#fff;padding:8px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Gönderilen Gün</div><div style="font-weight:600;">'+ (v.gunSayisi||0) +'</div></div>';
+                                                            html += '<div style="background:#fff;padding:8px;border:1px solid #e3e7ed;border-radius:6px;"><div style="font-size:11px;color:#667;">Eksik Gün</div><div style="font-weight:600;color:' + ((v.eksikGunler||[]).length?'#d35400':'#16a34a') + ';">'+ (v.eksikGunler||[]).length +'</div></div>';
+                                                            html += '</div>';
+                                                            if((v.eksikGunler||[]).length){
+                                                                html += '<div style="background:#fff3cd;border:1px solid #ffe69c;padding:8px 10px;border-radius:6px;font-size:12px;margin-bottom:10px;">Eksik Günler: '+ v.eksikGunler.join(', ') +'<br><button onclick="triggerAutoFillLastMonth(this)" style="margin-top:6px;padding:6px 10px;background:#ff9800;border:none;border-radius:5px;cursor:pointer;color:#222;font-weight:600;">⚙️ Auto-Fill</button></div>';
+                                                            }
+                                                            if(dwh && dwh.dwhToplamCiro !== undefined){
+                                                                html += '<div style="font-size:12px;margin:6px 0 10px;">DWH Ciro: '+ Number(dwh.dwhToplamCiro).toLocaleString('tr-TR') +'₺ | LOG: '+ (v.toplamCiro||0).toLocaleString('tr-TR') +'₺ | Fark: '+ (dwh.farkCiro || '0') +' ('+ (dwh.farkYuzdeCiro||'0') +'%)</div>';
+                                                            }
+                                                            container.innerHTML = html;
+                                                        } catch(e){
+                                                            console.error('Fallback deep preview hata', e);
+                                                            const c=document.getElementById('deepPreviewResult'); if(c) c.innerHTML='Hata: '+ e.message;
+                                                        } finally { if(btn){ btn.disabled=false; btn.innerHTML='🧪 Geçmiş Ay Derin Önizleme'; } }
+                                                    };
+                                                    window.triggerAutoFillLastMonth = async function(btn){
+                                                        try {
+                                                            if(btn){ btn.disabled=true; var o=btn.innerHTML; btn.innerHTML='Çalışıyor...'; }
+                                                            const resp = await fetch('/monthly-last-month-autofill-run',{method:'POST'});
+                                                            const data = await resp.json();
+                                                            alert(data.success ? 'Auto-Fill tamamlandı' : ('Auto-Fill hata: '+ data.message));
+                                                            if(data.success){ window.runLastMonthDeepPreview(); }
+                                                        } catch(e){ alert('Auto-Fill tetikleme hatası: '+ e.message); }
+                                                        finally { if(btn){ btn.disabled=false; btn.innerHTML=o; }}
+                                                    };
+                                                    window.__deepPreviewFallbackDefined = true;
                                                 }
-                                            }
+                                                // tanımla ve sonra ana script geldi mi kontrol için 2 sn sonra tekrar test et
+                                                defineFallback();
+                                                setTimeout(function(){
+                                                    // Eğer daha zengin (fetch içeren) bir implementasyon yüklendiyse (toString kontrol vs) dokunma
+                                                    if(window.runLastMonthDeepPreview && window.runLastMonthDeepPreview.toString().indexOf('Derin Önizleme (Fallback)')>-1){
+                                                        console.warn('Deep preview fallback aktif (ana script override etmedi).');
+                                                    }
+                                                },2000);
+                                            })();
                                         </script>
                                         <button onclick="window.runLastMonthDeepPreview && runLastMonthDeepPreview(this)" style="padding:10px 18px; background:linear-gradient(135deg,#ff9800,#ffb74d); color:#222; font-weight:600; border:none; border-radius:8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.15);">🧪 Geçmiş Ay Derin Önizleme</button>
                                     </div>
@@ -1267,6 +1334,62 @@ app.get('/', async (req, res) => {
                             const spinner = document.getElementById('globalSpinner');
                             if (spinner) spinner.style.display = 'none';
                         }
+
+                        // Günlük detay loglarını yükle/göster
+                        let __dailyLogLoaded = false;
+                        async function loadDailyLogDetails(){
+                            const box = document.getElementById('dailyLogDetails');
+                            if(!box) return;
+                            box.innerHTML = '<em>Yükleniyor...</em>';
+                            try{
+                                const resp = await fetch('/daily-log-details');
+                                const data = await resp.json();
+                                if(!data.success){ box.innerHTML = 'Hata: '+ data.message; return; }
+                                const rows = data.rows || [];
+                                if(!rows.length){ box.innerHTML = '<em>Kayıt bulunamadı.</em>'; return; }
+                                const statusBadge = sc => {
+                                    const code = parseInt(sc,10);
+                                    let clr='#6c757d', txt='?';
+                                    if(code===201){ clr='#198754'; txt='OK'; }
+                                    else if(code>=500){ clr='#b91c1c'; txt='ERR'; }
+                                    else if(code>=400){ clr='#d97706'; txt='WARN'; }
+                                    return '<span style="display:inline-block;padding:2px 6px;border-radius:6px;font-size:10px;font-weight:600;background:'+clr+'20;color:'+clr+';">'+ txt +' '+ code +'</span>';
+                                };
+                                let html = '<table style="width:100%;border-collapse:collapse;">'+
+                                    '<thead><tr style="background:#eef1f5;font-size:11px;text-align:left;">'+
+                                    '<th style="padding:4px 6px;border:1px solid #dfe3e8;">Log Zamanı</th>'+ 
+                                    '<th style="padding:4px 6px;border:1px solid #dfe3e8;">Gün</th>'+ 
+                                    '<th style="padding:4px 6px;border:1px solid #dfe3e8;text-align:right;">Ciro</th>'+ 
+                                    '<th style="padding:4px 6px;border:1px solid #dfe3e8;text-align:right;">Kişi</th>'+ 
+                                    '<th style="padding:4px 6px;border:1px solid #dfe3e8;">Status</th>'+ 
+                                    '<th style="padding:4px 6px;border:1px solid #dfe3e8;">Kullanıcı</th>'+ 
+                                    '<th style="padding:4px 6px;border:1px solid #dfe3e8;">Cevap</th>'+ 
+                                    '</tr></thead><tbody>';
+                                html += rows.map(r => {
+                                    return '<tr style="font-size:11.5px;">'+
+                                        '<td style="padding:4px 6px;border:1px solid #eee;white-space:nowrap;">'+ new Date(r.logZamani).toLocaleString('tr-TR') +'</td>'+ 
+                                        '<td style="padding:4px 6px;border:1px solid #eee;">'+ (r.gunTarihi||'') +'</td>'+ 
+                                        '<td style="padding:4px 6px;border:1px solid #eee;text-align:right;color:#1e8e3e;">'+ (parseFloat(r.ciro||0).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})) +'</td>'+ 
+                                        '<td style="padding:4px 6px;border:1px solid #eee;text-align:right;color:#1d5fbf;">'+ (r.kisi||'') +'</td>'+ 
+                                        '<td style="padding:4px 6px;border:1px solid #eee;">'+ statusBadge(r.statuscode) +'</td>'+ 
+                                        '<td style="padding:4px 6px;border:1px solid #eee;">'+ (r.kullanici||'') +'</td>'+ 
+                                        '<td style="padding:4px 6px;border:1px solid #eee;max-width:320px;overflow:hidden;text-overflow:ellipsis;">'+ (r.cevapKisa||'') +'</td>'+ 
+                                    '</tr>';
+                                }).join('');
+                                html += '</tbody></table>';
+                                box.innerHTML = html;
+                                __dailyLogLoaded = true;
+                            }catch(e){ box.innerHTML='Hata: '+ e.message; }
+                        }
+                        function toggleDailyLogDetails(){
+                            const box = document.getElementById('dailyLogDetails');
+                            if(!box) return;
+                            const visible = box.style.display !== 'none';
+                            box.style.display = visible ? 'none' : 'block';
+                            if(!visible && !__dailyLogLoaded){ loadDailyLogDetails(); }
+                        }
+                        window.toggleDailyLogDetails = toggleDailyLogDetails;
+                        window.loadDailyLogDetails = loadDailyLogDetails;
                         
                         // Preview monthly data
                         async function previewMonthlyData() {
@@ -1961,9 +2084,39 @@ app.post('/send', requireLogin, async (req, res) => {
         // Normalize numeric formats (string with dot decimal, consistent with monthly)
         const netCiro = (parseFloat(ciro) || 0).toFixed(2); // ensures 2 decimals
         const txCount = (parseInt(kisi, 10) || 0).toString();
+
+        // Tarih formatı API için ISO'ya dönüştür (manuel giriş dd.MM.yyyy geliyor)
+        function toIsoDate(src){
+            if(!src) return src;
+            // dd.MM.yyyy
+            const m = src.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+            if(m){
+                const dd = m[1].padStart(2,'0');
+                const mm = m[2].padStart(2,'0');
+                const yyyy = m[3];
+                return `${yyyy}-${mm}-${dd}`;
+            }
+            // already yyyy-MM-dd
+            if(/^\d{4}-\d{2}-\d{2}$/.test(src)) return src;
+            // fallback: try Date parse
+            const d = new Date(src);
+            if(!isNaN(d.getTime())){
+                const dd = String(d.getDate()).padStart(2,'0');
+                const mm = String(d.getMonth()+1).padStart(2,'0');
+                const yyyy = d.getFullYear();
+                return `${yyyy}-${mm}-${dd}`;
+            }
+            return src; // as-is
+        }
+
+        const isoDate = toIsoDate(tarih);
+        if(!/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) {
+            console.warn('[MANUAL_SEND] Tarih ISO formatına dönüştürülemedi, gönderilen:', isoDate, 'orijinal:', tarih);
+        }
+
         const payload = [{
-            SalesToDATE: tarih,
-            SalesFromDATE: tarih,
+            SalesToDATE: isoDate,
+            SalesFromDATE: isoDate,
             NetSalesAmount: netCiro,       // string form
             NoofTransactions: txCount,     // string form
             SalesFrequency: 'Daily',
@@ -1998,7 +2151,16 @@ app.post('/send', requireLogin, async (req, res) => {
 
         res.redirect('/');
     } catch (err) {
-        console.error(`❌ [HATA] Gönderim başarısız! Kullanıcı: ${fullUserInfo}, Hata: ${err.message}`);
+        let apiStatus = err.response?.status;
+        let apiBody = err.response?.data;
+        if(apiStatus){
+            console.error(`❌ [HATA] Gönderim başarısız! Status=${apiStatus} Kullanıcı=${fullUserInfo}`);
+            if(apiBody) {
+                try { console.error('↩️ API BODY:', typeof apiBody === 'string' ? apiBody : JSON.stringify(apiBody)); } catch(_e) {}
+            }
+        } else {
+            console.error(`❌ [HATA] Gönderim başarısız! Kullanıcı: ${fullUserInfo}, Hata: ${err.message}`);
+        }
 
         if (!restoPool) {
             restoPool = new sql.ConnectionPool(restoConfig);
@@ -2014,8 +2176,8 @@ app.post('/send', requireLogin, async (req, res) => {
             .input('veri1', sql.VarChar, ciro)
             .input('veri2', sql.VarChar, kisi)
             .input('veri3', sql.VarChar, tarih)
-            .input('cevap', sql.Text, err.message)
-            .input('statuscode', sql.Int, 500)
+            .input('cevap', sql.Text, apiBody ? (typeof apiBody === 'string' ? apiBody : JSON.stringify(apiBody)) : err.message)
+            .input('statuscode', sql.Int, apiStatus || 500)
             .query(`INSERT INTO basar.personelLog 
                     (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode) 
                     VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)`);
@@ -2030,7 +2192,13 @@ app.post('/send', requireLogin, async (req, res) => {
                 errorMessage: err.message,
                 errorStack: err.stack || '',
                 severity: 'ERROR',
-                context: { route: '/send', payload: { ciro, kisi, tarih } }
+                context: { 
+                    route: '/send', 
+                    originalPayload: { ciro, kisi, tarih },
+                    apiPayload: { SalesFromDATE: isoDate, SalesToDATE: isoDate, NetSalesAmount: (parseFloat(ciro)||0).toFixed(2), NoofTransactions: (parseInt(kisi,10)||0).toString() },
+                    apiStatus, 
+                    apiBody: apiBody && (typeof apiBody === 'string' ? apiBody : JSON.stringify(apiBody)).slice(0,4000)
+                }
             });
         } catch (mailErr) {
             console.error('Hata emaili gönderilemedi (MANUAL_SEND):', mailErr.message);
@@ -2041,6 +2209,33 @@ app.post('/send', requireLogin, async (req, res) => {
             await restoPool.close();
         }
     }
+});
+
+// Günlük detay log endpointi (son 60 gün)
+app.get('/daily-log-details', requireLogin, async (req, res) => {
+    let pool;
+    try {
+        pool = new sql.ConnectionPool(restoConfig);
+        await pool.connect();
+        const result = await pool.request()
+            .query(`SELECT TOP 500
+                id = ROW_NUMBER() OVER(ORDER BY tarih DESC),
+                tarih as logZamani,
+                veri3 as gunTarihi,
+                veri1 as ciro,
+                veri2 as kisi,
+                statuscode,
+                kullanici,
+                SUBSTRING(CAST(cevap AS NVARCHAR(MAX)),1,4000) AS cevapKisa
+            FROM basar.personelLog
+            WHERE tablo = 'ciro'
+              AND TRY_CONVERT(date, veri3, 104) >= DATEADD(day,-60, CAST(GETDATE() as date))
+            ORDER BY tarih DESC`);
+        res.json({ success:true, rows: result.recordset });
+    } catch(e){
+        console.error('daily-log-details hata', e.message);
+        res.json({ success:false, message:e.message });
+    } finally { if(pool) await pool.close(); }
 });
 
 // 🚀 GÜNLÜK SCHEDULER - Her gün 17:00'da "dünkü" günü gönderir
@@ -2848,4 +3043,56 @@ function validateSubmissionData(data) {
         isValid: errors.length === 0,
         errors: errors
     };
+}
+
+// Geliştirilmiş günlük gönderim durum detayı: son durum, önce/sonra başarısız denemeler
+async function gonderimDurumDetay(tarih) {
+    let pool;
+    try {
+        pool = new sql.ConnectionPool(restoConfig);
+        await pool.connect();
+
+        // Son log
+        const lastResult = await pool.request()
+            .input('tarih', sql.VarChar, tarih)
+            .query(`SELECT TOP 1 statuscode, tarih AS logTime FROM basar.personelLog WHERE veri3=@tarih AND tablo='ciro' ORDER BY tarih DESC`);
+
+        // Başarılı log var mı
+        const successResult = await pool.request()
+            .input('tarih', sql.VarChar, tarih)
+            .query(`SELECT TOP 1 tarih FROM basar.personelLog WHERE veri3=@tarih AND tablo='ciro' AND statuscode=201 ORDER BY tarih DESC`);
+
+        let latestSuccessTime = successResult.recordset.length ? successResult.recordset[0].tarih : null;
+        let failuresAfterSuccess = 0;
+        if (latestSuccessTime) {
+            const failAfter = await pool.request()
+                .input('tarih', sql.VarChar, tarih)
+                .input('succTime', sql.DateTime, latestSuccessTime)
+                .query(`SELECT COUNT(1) AS cnt FROM basar.personelLog WHERE veri3=@tarih AND tablo='ciro' AND statuscode<>201 AND tarih > @succTime`);
+            failuresAfterSuccess = failAfter.recordset[0].cnt;
+        }
+
+        const hasSuccess = !!latestSuccessTime;
+        const lastStatusCode = lastResult.recordset.length ? lastResult.recordset[0].statuscode : null;
+        const lastIsSuccess = lastStatusCode === 201;
+        const degraded = hasSuccess && !lastIsSuccess; // başarı vardı ama en son deneme failed
+        const neverSent = !hasSuccess && lastStatusCode === null;
+        const onlyFailures = !hasSuccess && lastStatusCode !== null;
+
+        return {
+            hasSuccess,
+            lastStatusCode,
+            lastIsSuccess,
+            degraded,
+            neverSent,
+            onlyFailures,
+            failuresAfterSuccess,
+            latestSuccessTime
+        };
+    } catch (e) {
+        console.error('gonderimDurumDetay hata', e.message);
+        return { error: e.message };
+    } finally {
+        if (pool) await pool.close();
+    }
 }
