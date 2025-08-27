@@ -2265,9 +2265,10 @@ app.get('/daily-log-details', requireLogin, async (req, res) => {
     } finally { if(pool) await pool.close(); }
 });
 
-// 🚀 GÜNLÜK SCHEDULER - Her gün 17:00'da "dünkü" günü gönderir
+// 🚀 GÜNLÜK SCHEDULER - Her gün 14:30'da "dünkü" günü gönderir
 // Tek tarih işlenir, tarih formatı DD.MM.YYYY olarak normalize edildi
-schedule.scheduleJob('0 17 * * *', async () => {
+// Cron formatı (node-schedule): m h dom mon dow
+schedule.scheduleJob('30 14 * * *', async () => {
     const now = new Date();
     const target = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1); // dün
     const dd = String(target.getDate()).padStart(2, '0');
