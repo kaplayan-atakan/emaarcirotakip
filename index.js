@@ -896,19 +896,17 @@ app.get('/', async (req, res) => {
                     let statusBadge = '';
                     if (detay.error) {
                         statusBadge = `<span style=\"background:#dc354520;color:#dc3545;padding:2px 6px;border-radius:6px;font-size:11px;\">ERR</span>`;
-                    } else if (detay.neverSent) {
-                        statusBadge = `<span style=\"background:#6c757d20;color:#6c757d;padding:2px 6px;border-radius:6px;font-size:11px;\">YOK</span>`;
+                    } else if (detay.hasSuccess) { // herhangi bir 201 başarı yeterli
+                        statusBadge = `<span title=\"En az bir başarılı (201) log mevcut\" style=\"background:#19875420;color:#198754;padding:2px 6px;border-radius:6px;font-size:11px;\">OK</span>`;
                     } else if (detay.onlyFailures) {
                         statusBadge = `<span style=\"background:#b91c1c20;color:#b91c1c;padding:2px 6px;border-radius:6px;font-size:11px;\">FAIL</span>`;
-                    } else if (detay.degraded) {
-                        statusBadge = `<span title=\"Önce başarı sonra hata (son: ${detay.lastStatusCode})\" style=\"background:#d9770620;color:#d97706;padding:2px 6px;border-radius:6px;font-size:11px;\">DEG</span>`;
-                    } else if (detay.lastIsSuccess) {
-                        statusBadge = `<span style=\"background:#19875420;color:#198754;padding:2px 6px;border-radius:6px;font-size:11px;\">OK</span>`;
+                    } else if (detay.neverSent) {
+                        statusBadge = `<span style=\"background:#6c757d20;color:#6c757d;padding:2px 6px;border-radius:6px;font-size:11px;\">YOK</span>`;
                     } else {
                         statusBadge = `<span style=\"background:#6c757d20;color:#6c757d;padding:2px 6px;border-radius:6px;font-size:11px;\">?${detay.lastStatusCode||''}</span>`;
                     }
-                    const buttonClass = detay.lastIsSuccess ? 'btn-success' : 'btn-danger';
-                    const buttonText = detay.lastIsSuccess ? 'Yeniden Gönder' : 'Gönder';
+                    const buttonClass = detay.hasSuccess ? 'btn-success' : 'btn-danger';
+                    const buttonText = detay.hasSuccess ? 'Yeniden Gönder' : 'Gönder';
 
                     tableRows += `
                     <tr>
@@ -1449,6 +1447,20 @@ app.get('/', async (req, res) => {
                                     previewHTML += '<p><strong>Günlük Ortalama Kişi:</strong> ' + Math.round(veri.toplamKisi / veri.gunSayisi) + '</p>';
                                     previewHTML += '</div>';
                                     
+                                    // Eksik günler ve Auto-Fill butonu
+                                    if (veri.eksikGunler && veri.eksikGunler.length) {
+                                        const eksikList = veri.eksikGunler.join(', ');
+                                        previewHTML += '<div style="margin-top:15px;padding:12px 14px;border:1px solid #ffe69c;background:#fff8e1;border-radius:8px;">'+
+                                            '<div style="font-size:13px;color:#6c5500;margin-bottom:6px;font-weight:600;">Eksik Günler ('+ veri.eksikGunler.length +')</div>'+ 
+                                            '<div style="font-size:12.5px;color:#6c5500;line-height:1.4;">'+ eksikList +'</div>'+ 
+                                            '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">'+
+                                                '<button onclick="runMonthlyAutoFill('+ yil +','+ ay +')" style="padding:8px 14px;background:#ff9800;color:#222;font-weight:600;border:none;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);">⚙️ Auto-Fill Eksik Günler</button>'+
+                                                '<button onclick="runMonthlyAutoFill('+ yil +','+ ay +', true)" style="padding:8px 14px;background:#f59e0b;color:#222;font-weight:600;border:none;border-radius:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.15);">♻️ Retry (Başarısız Günler Dahil)</button>'+
+                                            '</div>'+ 
+                                            '<div id="monthlyAutoFillResult" style="margin-top:10px;font-size:12px;color:#444;"></div>'+ 
+                                        '</div>';
+                                    }
+
                                     previewDiv.innerHTML = previewHTML;
                                     previewDiv.style.display = 'block';
                                 } else {
@@ -1463,6 +1475,21 @@ app.get('/', async (req, res) => {
                         }
                         
                         // Send monthly data
+                        async function runMonthlyAutoFill(yil, ay, includeFailed=false){
+                            if(!confirm('Eksik günler için Auto-Fill çalıştırılsın mı?'+ (includeFailed?'\n(Başarısız loglu günler de tekrar denenecek)':'')) ) return;
+                            const out = document.getElementById('monthlyAutoFillResult');
+                            if(out) out.innerHTML='Çalışıyor...';
+                            try {
+                                const resp = await fetch('/monthly-autofill-run', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ yil, ay, includeFailed }) });
+                                const data = await resp.json();
+                                if(!data.success){ out && (out.innerHTML='Hata: '+ data.message); return; }
+                                const s = data.sonuc || {}; 
+                                out && (out.innerHTML = 'Tamamlandı. Gönderilen: '+ (s.sentDays||[]).length +' | Bulunamadı: '+ (s.notFoundDays||[]).length +' | Hatalı: '+ (s.failedDays||[]).length + (s.retriedDays?(' | Retry Gün: '+ s.retriedDays.length):''));
+                                // Auto-Fill sonrası önizlemeyi yenile
+                                previewMonthlyData();
+                            } catch(e){ out && (out.innerHTML='Hata: '+ e.message); }
+                        }
+                        window.runMonthlyAutoFill = runMonthlyAutoFill;
                         async function sendMonthlyData() {
                             const yil = document.getElementById('monthlyYil').value;
                             const ay = document.getElementById('monthlyAy').value;
@@ -2593,6 +2620,75 @@ app.post('/monthly-preview', async (req, res) => {
             message: 'Veri önizleme sırasında hata oluştu',
             error: error.message
         });
+    }
+});
+
+// Aylık Auto-Fill (standart önizleme için) - includeFailed: başarısız günleri de yeniden dener
+app.post('/monthly-autofill-run', async (req, res) => {
+    if (!req.session.login && !req.session.adUser) {
+        return res.status(401).json({ success:false, message:'Unauthorized' });
+    }
+    const { yil, ay, includeFailed } = req.body || {};
+    if(!yil || !ay) return res.status(400).json({ success:false, message:'yil ve ay gerekli' });
+    try {
+        // Önce eksikleri bul
+        const veri = await monthlyOperations.aylikVeriHesapla(parseInt(yil), parseInt(ay));
+        let hedefGunler = [...veri.eksikGunler];
+        const retriedDays = [];
+        // includeFailed seçiliyse: statuscode<>201 içeren günleri de ekle
+        if(includeFailed){
+            let pool;
+            try {
+                pool = new sql.ConnectionPool(restoConfig);
+                await pool.connect();
+                const mm = ay.toString().padStart(2,'0');
+                const pattern = `%.${mm}.${yil}`;
+                const failQ = await pool.request().input('p', sql.VarChar, pattern).query(`SELECT DISTINCT veri3 as gun FROM basar.personelLog WHERE tablo='ciro' AND veri3 LIKE @p AND statuscode<>201`);
+                for(const r of failQ.recordset){
+                    if(!hedefGunler.includes(r.gun)) { hedefGunler.push(r.gun); retriedDays.push(r.gun); }
+                }
+            } catch(e){ console.warn('includeFailed sorgu hatası', e.message); }
+            finally { if(pool) await pool.close(); }
+        }
+        // Geçici: tamamlaEksikGunler fonksiyonu içsel olarak aylikVeriHesapla çağırıyor; direkt onu kullanıp döneceğiz.
+        // Eğer includeFailed varsa ve bu günleri de zorlamak istiyorsak manuel döngü gerekirdi. Şimdilik baseline: sadece eksikGunler için fonksiyon + ekstra günler (retry) için ayrı loop.
+        const sonuc = await monthlyOperations.tamamlaEksikGunler(parseInt(yil), parseInt(ay));
+        // Retry günleri (eğer ilk listede yoksa ve halen success olmadıysa) tek tek gönder
+        const ekSent = [];
+        const ekFailed = [];
+        if(includeFailed && retriedDays.length){
+            for(const dt of retriedDays){
+                // zaten başarı elde etmiş olabilir
+                if(sonuc.sentDays && sonuc.sentDays.includes(dt)) continue;
+                // log kontrol statuscode=201 var mı
+                let pool2; let hasSuccess=false;
+                try { pool2 = new sql.ConnectionPool(restoConfig); await pool2.connect(); const chk= await pool2.request().input('t', sql.VarChar, dt).query("SELECT TOP 1 1 FROM basar.personelLog WHERE veri3=@t AND tablo='ciro' AND statuscode=201"); hasSuccess = chk.recordset.length>0; } catch(e){} finally { if(pool2) await pool2.close(); }
+                if(hasSuccess) { ekSent.push(dt); continue; }
+                // DWH kaynağından gönder
+                try {
+                    const [dd,mm,yyyy]=dt.split('.');
+                    const isoDate=`${yyyy}-${mm}-${dd}`;
+                    let dwhPool = new sql.ConnectionPool(dwhConfig); await dwhPool.connect();
+                    const r = await dwhPool.request().input('t', sql.VarChar, dt).query("SELECT TOP 1 CAST(Ciro AS DECIMAL(18,2)) as Ciro, [Kişi Sayısı] as Kisi FROM [DWH].[dbo].[FactKisiSayisiCiro] WHERE [Şube Kodu]=17672 AND Tarih=@t");
+                    await dwhPool.close();
+                    if(!r.recordset.length){ ekFailed.push(dt); continue; }
+                    const ciro = parseFloat(r.recordset[0].Ciro).toFixed(2); const kisi = parseInt(r.recordset[0].Kisi,10);
+                    const payload=[{SalesFromDATE:isoDate,SalesToDATE:isoDate,NetSalesAmount:ciro,NoofTransactions:kisi.toString(),SalesFrequency:'Daily',PropertyCode:'ESM',LeaseCode:'t0000967',SaleType:'food'}];
+                    const resp = await axios.post(API_URL, payload, { headers: API_HEADERS });
+                    let pool3 = new sql.ConnectionPool(restoConfig); await pool3.connect();
+                    await pool3.request().input('tarih', sql.DateTime, new Date()).input('ip', sql.VarChar, 'AUTO-FILL-RETRY').input('kullanici', sql.VarChar, 'SYSTEM: Missing Day AutoFill Retry').input('tablo', sql.VarChar, 'ciro').input('veri', sql.Text, JSON.stringify(payload)).input('veri1', sql.VarChar, ciro).input('veri2', sql.VarChar, kisi.toString()).input('veri3', sql.VarChar, dt).input('cevap', sql.Text, JSON.stringify(resp.data)).input('statuscode', sql.Int, resp.status).query("INSERT INTO basar.personelLog (tarih, ip, kullanici, tablo, veri, veri1, veri2, veri3, cevap, statuscode) VALUES (@tarih, @ip, @kullanici, @tablo, @veri, @veri1, @veri2, @veri3, @cevap, @statuscode)");
+                    await pool3.close(); ekSent.push(dt);
+                } catch(e){ console.error('Retry gönderim hata', dt, e.message); ekFailed.push(dt); }
+            }
+        }
+        // Sonuçları birleştir
+        sonuc.retriedDays = retriedDays;
+        sonuc.retrySentDays = ekSent;
+        sonuc.retryFailedDays = ekFailed;
+        return res.json({ success:true, sonuc });
+    } catch(e){
+        console.error('monthly-autofill-run hata', e.message);
+        return res.json({ success:false, message:e.message });
     }
 });
 
