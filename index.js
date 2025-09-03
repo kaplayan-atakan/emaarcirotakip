@@ -2416,8 +2416,8 @@ schedule.scheduleJob('* /2 * * * *', async () => {
 });
 */
 
-// 📅 AYLIK CİRO RAPORU SCHEDULER - Her ayın 2'sinde saat 18:00'da çalışır (Emaar kilitleme politikası için)
-schedule.scheduleJob('0 18 2 * *', async () => {
+// 📅 AYLIK CİRO RAPORU SCHEDULER - Her ayın 3'ünde saat 16:00'da çalışır (güncellenmiş)
+schedule.scheduleJob('0 16 3 * *', async () => {
     console.log('📊 [SCHEDULER] Aylık ciro raporu scheduler başlatıldı:', new Date().toLocaleString('tr-TR'));
     
     try {

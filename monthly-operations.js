@@ -119,9 +119,18 @@ async function aylikVeriHesapla(yil, ay) {
                 toplamCiro += rec.ciro;
                 toplamKisi += rec.kisi;
                 detaylar.push({ tarih: dt, ciro: rec.ciro, kisi: rec.kisi, kaynak: rec.kaynak });
-            } else {
-                missingDays.push(dt);
+                continue;
             }
+            // LOG'da yok; farklı padlenmiş formatla gelmiş olabilir (örn: '1.08.2025')
+            const altFormat = dt.replace(/^0/,''); // 01.08.2025 -> 1.08.2025
+            if (logMap.has(altFormat)) {
+                const rec = logMap.get(altFormat);
+                toplamCiro += rec.ciro;
+                toplamKisi += rec.kisi;
+                detaylar.push({ tarih: dt, ciro: rec.ciro, kisi: rec.kisi, kaynak: rec.kaynak });
+                continue;
+            }
+            missingDays.push(dt);
         }
 
         // Eksik günleri opsiyonel DWH doğrulaması ile raporlamak için (toplama dahil etmiyoruz!)
@@ -139,12 +148,19 @@ async function aylikVeriHesapla(yil, ay) {
                       AND CONVERT(datetime, Tarih, 104) IN (${inClause})
                 `;
                 const dwhMissing = await dwhPool.request().query(dwhMissingQuery);
-                dwhEksikDetay = dwhMissing.recordset.map(r => ({
-                    tarih: r.Tarih,
-                    ciro: parseFloat(r.Ciro),
-                    kisi: parseInt(r.Kisi,10),
-                    kaynak: 'DWH_ONLY'
-                }));
+                dwhEksikDetay = dwhMissing.recordset.map(r => {
+                    // DWH Tarih değeri '1.08.2025' gibi pad'siz gelebilir -> normalize et
+                    const parts = r.Tarih.split('.');
+                    let gun = parts[0];
+                    if (gun.length === 1) gun = '0'+gun;
+                    const norm = `${gun}.${parts[1]}.${parts[2]}`; // 01.08.2025
+                    return {
+                        tarih: norm,
+                        ciro: parseFloat(r.Ciro),
+                        kisi: parseInt(r.Kisi,10),
+                        kaynak: 'DWH_ONLY'
+                    };
+                });
             } catch(e) {
                 console.warn('⚠️ Eksik günler için DWH doğrulama yapılamadı:', e.message);
             }
@@ -554,11 +570,24 @@ async function tamamlaEksikGunler(yil, ay) {
             // DWH'den gün verisi
             let dwhRec;
             try {
-                const r = await dwhPool.request()
-                    .input('tarih', sql.VarChar, dt)
-                    .query(`SELECT TOP 1 Tarih, CAST(Ciro AS DECIMAL(18,2)) AS Ciro, [Kişi Sayısı] AS Kisi FROM [DWH].[dbo].[FactKisiSayisiCiro] WHERE [Şube Kodu] = 17672 AND Tarih = @tarih`);
+                                const r = await dwhPool.request()
+                                        .input('tarih', sql.VarChar, dt)
+                                        .query(`SELECT TOP 1 Tarih, CAST(Ciro AS DECIMAL(18,2)) AS Ciro, [Kişi Sayısı] AS Kisi 
+                                                        FROM [DWH].[dbo].[FactKisiSayisiCiro]
+                                                        WHERE [Şube Kodu] = 17672
+                                                            AND CONVERT(date, Tarih, 104) = CONVERT(date, @tarih, 104)`);
                 if (r.recordset.length === 0) {
                     console.warn(`⚠️ DWH'de bulunamadı: ${dt}`);
+                    // Teşhis: Ay içindeki mevcut tarihler bir kez çekilip gösterilsin (yalnızca ilk notFound için)
+                    if (notFoundDays.length === 0) {
+                        try {
+                            const diag = await dwhPool.request()
+                                .input('yil', sql.Int, parseInt(yyyy,10))
+                                .input('ay', sql.Int, parseInt(mm,10))
+                                .query(`SELECT DISTINCT TOP 40 Tarih FROM [DWH].[dbo].[FactKisiSayisiCiro] WHERE [Şube Kodu]=17672 AND RIGHT(Tarih,4)=@yil AND SUBSTRING(Tarih,4,2)=RIGHT('0'+CAST(@ay as varchar(2)),2) ORDER BY CONVERT(datetime,Tarih,104)`);
+                            console.log('🩺 DWH Ay İçi Mevcut Günler:', diag.recordset.map(x=>x.Tarih));
+                        } catch(diagErr) { console.warn('Teşhis sorgusu başarısız:', diagErr.message); }
+                    }
                     notFoundDays.push(dt);
                     continue;
                 }
